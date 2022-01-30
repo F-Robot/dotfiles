@@ -1,0 +1,8 @@
+# dotfiles:
+
+- Nvim
+- Bash
+- Prettier
+- Stylua
+- Starship
+- Htop
