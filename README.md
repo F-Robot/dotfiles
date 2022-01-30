@@ -7,3 +7,4 @@
 - Starship
 - Htop
 - Husky
+- Commitlint
