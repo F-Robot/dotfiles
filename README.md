@@ -6,3 +6,4 @@
 - Stylua
 - Starship
 - Htop
+- Husky
