@@ -3,6 +3,7 @@ local cmd = vim.cmd
 
 cmd('source ~/.config/nvim/lua/autocmds.vim')
 cmd('source ~/.config/nvim/lua/packages/grepcommand.vim')
+
 -- This Plugins needs required before others
 -- Icons and Colorscheme
 require('packages.devicons')
@@ -35,7 +36,6 @@ require('packages.bufferline')
 
 -- Typing
 require('packages.autopairs')
-require('packages.sandwich')
 require('packages.luasnip')
 require('packages.cmp')
 

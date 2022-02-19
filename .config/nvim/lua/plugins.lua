@@ -6,10 +6,11 @@ return require('packer').startup(function()
   use({ 'ibhagwan/fzf-lua', requires = 'kyazdani42/nvim-web-devicons' })
 
   -- Highlight
+  use 'JoosepAlviste/nvim-ts-context-commentstring'
   use('EdenEast/nightfox.nvim')
   use('lukas-reineke/indent-blankline.nvim')
-  use('norcalli/nvim-colorizer.lua')
   use('nvim-treesitter/nvim-treesitter')
+  use('norcalli/nvim-colorizer.lua')
 
   -- UI Components
   use('akinsho/bufferline.nvim')
@@ -18,7 +19,7 @@ return require('packer').startup(function()
 
   -- Typing
   use('windwp/nvim-autopairs')
-  use('machakann/vim-sandwich')
+  use('tpope/vim-surround')
 
   -- Git
   use('tpope/vim-fugitive')

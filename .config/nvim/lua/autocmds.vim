@@ -27,3 +27,5 @@ augroup savebuffer
   autocmd!
   autocmd InsertLeave,TextChanged * call autocmds#savebuffer#()
 augroup end
+
+" autocmd BufRead,BufNewFile *.vue :set filetype=vue.html

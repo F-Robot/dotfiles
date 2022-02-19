@@ -179,6 +179,7 @@ local formatting_prettierd = {
     'vue',
     'json',
     'html',
+    'scss',
   },
 }
 local djhtml_args = {

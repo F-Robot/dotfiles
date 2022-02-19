@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Init Projects Aliases
-alias npminit="git init && npm init -y && npx gitignore node && npx husky-init && npm install"
+alias npminit="npm init -y && npx gitignore node && npx husky-init && npm install"
 alias huskyinit="rm ./.husky/pre-commit && npx husky add .husky/commit-msg 'npx --no-install commitlint --edit \"$1\"'"
 
 # List Aliases
@@ -12,16 +12,21 @@ alias l="ls -CF"
 
 # Usefule Aliases
 alias gitrepair="git rm -fr --cached ."
-alias aptupdate="sudo apt update -y && sudo apt upgrade -y"
-alias nvimrc="cd ~/.config/nvim/ && nvim init.lua"
-alias bashrc="cd ~/.config/bash/ && nvim .bashrc"
+alias update="sudo apt update -y && sudo apt upgrade -y"
+alias aptclean="apt autoremove && apt autopurge"
+alias nvimrc="cd ~/.dotfiles/.config/nvim/ && nvim init.lua"
+alias bashrc="cd ~/.dotfiles/.config/bash/ && nvim .bashrc"
 alias logout="loginctl terminate-user ricardo"
 
 # System Aliases
+alias st="firefox && ytmusic && thunderbird && whap"
+alias cr="clear"
 alias apt="sudo apt"
 alias snap="sudo snap"
+alias dpkg="sudo dpkg"
 alias sb="source ~/.bashrc"
 alias rm="trash" # Use 'trash' command instead 'rm'
+alias nv="nvim"
 alias mv="mv --interactive --verbose" # Move nodes with interactive mode and extra verbosity.
 alias cp="cp --interactive --verbose" # Copy nodes with interactive mode and extra verbosity.
 alias ln="ln --interactive --verbose" # Link nodes with interactive mode and extra verbosity.
@@ -45,9 +50,14 @@ alias gc="git commit -m "
 alias gr="git restore"
 alias gd="git diff"
 alias gl="git log"
+alias gem="git checkout master"
+alias ged="git checkout dev"
+alias gps="git push origin master"
+alias gpl="git pull origin master"
 
 # NPM
 alias ns="npm start"
+alias ni="npm install"
 alias nd="npm run dev"
 alias nt="npm run test"
 alias nb="npm run build"

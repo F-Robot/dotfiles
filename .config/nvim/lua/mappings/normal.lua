@@ -6,6 +6,10 @@ map('n', 'q', '<Cmd>q<CR>')
 -- Disable Highligth
 map('n', '<Leader>n', '<Cmd>nohlsearch<CR>', { silent = true })
 
+-- Disable Highligth
+map('n', '<Leader>v', '<Cmd>set filetype=vue.html<CR>', { silent = true })
+map('n', '<Leader>V', '<Cmd>set filetype=vue<CR>', { silent = true })
+
 -- Source current file
 map('n', '<C-s>', '<Cmd>source /home/ricardo/.config/nvim/init.lua<CR>')
 

@@ -14,6 +14,12 @@ function gen-ssh-keygen-ed25519() {
 function gen-ssh-keygen-rsa() {
   ssh-keygen -t rsa -o -a 100 -b 4096 -f ~/.ssh/keys/$1 -C "$2"
 }
+# Convert ps files to pdf files
+function pdf() {
+  enscript "$1" -p "$2.ps"
+  ps2pdf "$2.ps" "$2.pdf"
+  rm "$2.ps"
+}
 #Add Aliases
 # function add-alias() {
 #   if()

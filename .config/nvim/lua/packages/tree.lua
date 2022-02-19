@@ -4,7 +4,7 @@ local g = vim.g
 local cmd = vim.cmd
 
 g.nvim_tree_show_icons = {
-  git = 0,
+  git = 1,
   folders = 1,
   files = 1,
 }
