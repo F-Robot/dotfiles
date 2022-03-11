@@ -5,6 +5,7 @@ export GOPATH="$HOME/.go"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$GOPATH/bin"
+export PATH="$HOME/.local/lib/lua-language-server/bin:$PATH"
 # Basics
 export EDITOR="nvim"
 export NVM_DIR="$HOME/.nvm"

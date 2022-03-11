@@ -3,25 +3,6 @@ local map = require('utils/utils').map
 local g = vim.g
 local cmd = vim.cmd
 
-g.nvim_tree_show_icons = {
-  git = 1,
-  folders = 1,
-  files = 1,
-}
-
--- Customize icons.
-g.nvim_tree_icons = {
-  git = {
-    unstaged = '',
-    staged = '',
-    unmerged = '',
-    renamed = '',
-    deleted = '',
-    untracked = '',
-    ignored = '',
-  },
-}
-
 -- Enable indent markers.
 g.nvim_tree_indent_markers = 1
 
@@ -42,5 +23,6 @@ nvim_tree.setup({
 
 cmd('highlight! NvimTreeNormal guibg=NONE')
 -- Nvim Tree
-map('n', '<Space>f', '<Cmd>NvimTreeToggle<CR>', { silent = true })
-map('n', '<Space>F', '<Cmd>NvimTreeFindFile<CR>z.', { silent = true })
+map('n', '<space>t', '<Cmd>NvimTreeToggle<CR>', { silent = true })
+map('n', '<space>r', '<Cmd>NvimTreeRefresh<CR>', { silent = true })
+map('n', '<space>T', '<Cmd>NvimTreeFindFile<CR>z.', { silent = true })

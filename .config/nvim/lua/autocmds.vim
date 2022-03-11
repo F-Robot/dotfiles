@@ -23,9 +23,7 @@ augroup blockreadonly
 augroup end
 
 " Save the current buffer after any changes.
-augroup savebuffer
-  autocmd!
-  autocmd InsertLeave,TextChanged * call autocmds#savebuffer#()
-augroup end
-
-" autocmd BufRead,BufNewFile *.vue :set filetype=vue.html
+" augroup savebuffer
+"   autocmd!
+"   autocmd InsertLeave,TextChanged * call autocmds#savebuffer#()
+" augroup end

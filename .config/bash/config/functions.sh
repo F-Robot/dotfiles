@@ -1,7 +1,10 @@
 #!/bin/bash
 # System Volume
 function vol() {
-  pactl -- set-sink-volume 0 "$1"%
+  pactl -- set-sink-volume $1 "$2"%
+}
+function op() {
+  echo $(($1))
 }
 # Daemonize
 function dae() {

@@ -24,7 +24,6 @@ terminal.open = function()
   local win = api.nvim_open_win(buf, true, {
     relative = 'editor',
     style = 'minimal',
-    border = 'rounded',
     width = width,
     height = height,
     noautocmd = true,
@@ -40,7 +39,9 @@ terminal.open = function()
   end
 
   vim.cmd('startinsert')
-  vim.cmd("autocmd! TermClose <buffer> lua require('utils/mappings/normal/terminal').close(true)")
+  vim.cmd(
+    "autocmd! TermClose <buffer> lua require('utils/mappings/normal/terminal').close(true)"
+  )
 
   -- Save current handles.
   terminal.win = win

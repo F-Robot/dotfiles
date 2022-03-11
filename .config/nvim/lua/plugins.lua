@@ -1,47 +1,41 @@
----@diagnostic disable: undefined-global
 return require('packer').startup(function()
-  -- Filesystem
+  -- Packer
   use('wbthomason/packer.nvim')
-  use('nathom/filetype.nvim')
-  use({ 'ibhagwan/fzf-lua', requires = 'kyazdani42/nvim-web-devicons' })
-
-  -- Highlight
-  use 'JoosepAlviste/nvim-ts-context-commentstring'
-  use('EdenEast/nightfox.nvim')
+  -- Colorschemes and Highlights
+  use('folke/tokyonight.nvim')
+  use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
+  use('theHamsta/nvim-treesitter-pairs')
   use('lukas-reineke/indent-blankline.nvim')
-  use('nvim-treesitter/nvim-treesitter')
   use('norcalli/nvim-colorizer.lua')
-
-  -- UI Components
-  use('akinsho/bufferline.nvim')
-  use('kyazdani42/nvim-tree.lua')
-  use('mbbill/undotree')
-
+  -- Filesystem
+  use('ibhagwan/fzf-lua')
+  use('nathom/filetype.nvim')
   -- Typing
   use('windwp/nvim-autopairs')
   use('tpope/vim-surround')
-
+  use('numToStr/Comment.nvim')
+  -- UI
+  use('mbbill/undotree')
+  use('kyazdani42/nvim-tree.lua')
+  use({ 'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons' })
   -- Git
-  use('tpope/vim-fugitive')
   use({ 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim' })
-  use('sindrets/diffview.nvim')
-
-  -- Snipp Engine
-  use('L3MON4D3/LuaSnip')
-  use('rafamadriz/friendly-snippets')
-
-  -- -- CMP
+  use('tpope/vim-fugitive')
+  -- CMP
   use('hrsh7th/nvim-cmp')
   use('hrsh7th/cmp-buffer')
   use('hrsh7th/cmp-path')
+  use('hrsh7th/cmp-cmdline')
   use('hrsh7th/cmp-nvim-lsp')
+  use('onsails/lspkind-nvim')
+  -- Snippets
+  use('L3MON4D3/LuaSnip')
   use('saadparwaiz1/cmp_luasnip')
-
+  use('rafamadriz/friendly-snippets')
+  use('b0o/schemastore.nvim')
   -- LSP
   use('neovim/nvim-lspconfig')
-  use('jose-elias-alvarez/nvim-lsp-ts-utils')
+  use('lukas-reineke/lsp-format.nvim')
   use('jose-elias-alvarez/null-ls.nvim')
-  use('b0o/schemastore.nvim')
-  use('antoinemadec/FixCursorHold.nvim')
-  use('nanotee/sqls.nvim')
+  use('Pocco81/AutoSave.nvim')
 end)

@@ -22,5 +22,5 @@ end
 
 return {
   map = map,
-  buf_map = buf_map
+  buf_map = buf_map,
 }

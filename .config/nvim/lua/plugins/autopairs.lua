@@ -1,6 +1,4 @@
 local autopairs = require('nvim-autopairs')
-
 autopairs.setup({
-  fast_wrap = {},
+  ignored_next_char = string.gsub([[ [%w%%%%[%.] ]], '%s+', ''),
 })
-
