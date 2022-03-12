@@ -10,19 +10,24 @@ g.nvim_tree_indent_markers = 1
 g.nvim_tree_group_empty = 1
 
 nvim_tree.setup({
+  disable_netrw = true,
   hijack_cursor = true,
   auto_close = true,
   git = {
     enable = false,
   },
   view = {
-    width = 20,
+    width = 25,
+    signcolumn = 'no',
     hide_root_folder = true,
   },
+  open_file = {
+    quit_on_open = true
+  }
 })
 
 cmd('highlight! NvimTreeNormal guibg=NONE')
 -- Nvim Tree
-map('n', '<space>t', '<Cmd>NvimTreeToggle<CR>', { silent = true })
-map('n', '<space>r', '<Cmd>NvimTreeRefresh<CR>', { silent = true })
-map('n', '<space>T', '<Cmd>NvimTreeFindFile<CR>z.', { silent = true })
+map('n', '<leader>t', '<Cmd>NvimTreeToggle<CR>', { silent = true })
+map('n', '<leader>r', '<Cmd>NvimTreeRefresh<CR>', { silent = true })
+map('n', '<leader>T', '<Cmd>NvimTreeFindFile<CR>z.', { silent = true })

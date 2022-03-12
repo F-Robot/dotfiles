@@ -25,6 +25,7 @@ terminal.open = function()
     relative = 'editor',
     style = 'minimal',
     width = width,
+    border = 'rounded',
     height = height,
     noautocmd = true,
     col = math.ceil((vim.o.columns - width) / 2),

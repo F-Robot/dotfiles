@@ -23,7 +23,7 @@ augroup blockreadonly
 augroup end
 
 " Save the current buffer after any changes.
-" augroup savebuffer
-"   autocmd!
-"   autocmd InsertLeave,TextChanged * call autocmds#savebuffer#()
-" augroup end
+augroup savebuffer
+  autocmd!
+  autocmd InsertLeave,TextChanged * call autocmds#savebuffer#()
+augroup end

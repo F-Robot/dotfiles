@@ -13,7 +13,7 @@ local capabilities = cmp_capabilities.update_capabilities(
   lsp.protocol.make_client_capabilities()
 )
 
-local function handle_attach(client)
+local function handle_attach()
   local opts = { silent = true }
   buf_map('n', 'K', '<Cmd>LspHover<CR>', opts)
   buf_map('n', 'J', '<Cmd>LspDiagLine<CR>', opts)
@@ -26,7 +26,6 @@ local function handle_attach(client)
   buf_map('n', '[g', '<Cmd>LspDiagPrev<CR>', opts)
   buf_map('n', ']g', '<Cmd>LspDiagNext<CR>', opts)
   buf_map('i', '<C-k>', '<Cmd>LspSignatureHelp<CR>', opts)
-  require "lsp-format".on_attach(client)
 end
 
 diagnostic.config({
@@ -49,6 +48,12 @@ fn.sign_define('DiagnosticSignInfo', {
 fn.sign_define('DiagnosticSignHint', {
   text = sign_char,
   texthl = 'DiagnosticSignHint',
+})
+
+-- Bash language Server
+lspconfig.bashls.setup({
+  on_attach = handle_attach,
+  capabilities = capabilities,
 })
 
 -- Html language Server
@@ -122,7 +127,9 @@ local formatting_stylua = {
 local sources = {
   -- Diagnostic
   null_ls.builtins.diagnostics.eslint_d,
+  null_ls.builtins.diagnostics.shellcheck,
   -- Formatting
+  null_ls.builtins.formatting.shfmt,
   null_ls.builtins.formatting.prettierd,
   null_ls.builtins.formatting.stylua.with(formatting_stylua),
 }
