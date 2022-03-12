@@ -1,19 +1,27 @@
 #!/bin/bash
 
+# Demonized Apps
+alias firefox="dae firefox"
+alias whap="dae whatsdesk"
+alias discord="dae discord"
+alias thunderbird="dae thunderbird"
+alias ytmusic="dae youtube-music-desktop-app"
+
 # Shortcuts Aliases
 alias cr="clear"
 alias ex="exit"
-alias deact="deactivate"
+alias nv="nvim"
+alias fx="firefox"
+alias rm="trash" # Use 'trash' command instead 'rm'
 alias apt="sudo apt"
 alias snap="sudo snap"
 alias dpkg="sudo dpkg"
-alias rm="trash" # Use 'trash' command instead 'rm'
-alias nv="nvim"
-alias mkdir="mkdir --parents" # Make missing parent directories when creating folders
+alias deact="deactivate"
+alias mkdir="mkdir --parents"         # Make missing parent directories when creating folders
 alias mv="mv --interactive --verbose" # Move nodes with interactive mode and extra verbosity.
 alias cp="cp --interactive --verbose" # Copy nodes with interactive mode and extra verbosity.
 alias ln="ln --interactive --verbose" # Link nodes with interactive mode and extra verbosity.
-alias du="du --max-depth=1 --si" # Display size of files and folders under current directory.
+alias du="du --max-depth=1 --si"      # Display size of files and folders under current directory.
 alias df="df --all --si --print-type" # Display all disk usage statistics with SI units and FS types.
 
 # Usefule Aliases
@@ -34,13 +42,6 @@ alias ls="ls --color=auto"
 alias ll="ls -alF"
 alias la="ls -A"
 alias l="ls -CF"
-
-# Demonized Apps
-alias firefox="dae firefox"
-alias whap="dae whatsdesk"
-alias discord="dae discord"
-alias thunderbird="dae thunderbird"
-alias ytmusic="dae youtube-music-desktop-app"
 
 ## Git
 alias gl="git log --oneline"

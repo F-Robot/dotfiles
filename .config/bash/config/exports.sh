@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # GOLANG
 export GOPATH="$HOME/.go"
 
@@ -24,7 +26,7 @@ export FZF_CTRL_T_OPTS="--height 40% --layout=reverse --ansi --preview 'bat --st
 export FZF_ALT_C_OPTS="--height 40% --layout=reverse --ansi"
 export FZF_CTRL_R_OPTS="--height 40% --layout=reverse --ansi"
 
-# GCC 
+# GCC
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # less
