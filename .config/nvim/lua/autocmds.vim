@@ -1,7 +1,6 @@
 " Briefly highlight yanked region.
 augroup highlightyank
   autocmd!
-
   autocmd TextYankPost *
     \ lua vim.highlight.on_yank({
       \ higroup = 'Visual',
@@ -27,3 +26,8 @@ augroup savebuffer
   autocmd!
   autocmd InsertLeave,TextChanged * call autocmds#savebuffer#()
 augroup end
+
+" augroup vueFiletype
+"   autocmd!
+"   autocmd BufRead,BufNewFile *.vue :set filetype=vue.html
+" augroup end

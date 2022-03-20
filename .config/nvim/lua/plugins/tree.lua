@@ -29,5 +29,4 @@ nvim_tree.setup({
 cmd('highlight! NvimTreeNormal guibg=NONE')
 -- Nvim Tree
 map('n', '<leader>t', '<Cmd>NvimTreeToggle<CR>', { silent = true })
-map('n', '<leader>r', '<Cmd>NvimTreeRefresh<CR>', { silent = true })
-map('n', '<leader>T', '<Cmd>NvimTreeFindFile<CR>z.', { silent = true })
+map('n', '<leader>T', '<Cmd>NvimTreeRefresh<CR>', { silent = true })

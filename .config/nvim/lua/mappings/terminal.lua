@@ -6,19 +6,19 @@ map('t', '<C-n>', '<C-\\><C-n>', { silent = true })
 -- Toggle floating terminal or create new one if there is none.
 map(
   't',
-  '<M-z>',
+  '<C-h>',
   "<Cmd>lua require('utils/mappings/normal/terminal').toggle()<CR>",
   { silent = true }
 )
 map(
   'n',
-  '<M-z>',
+  '<leader>r',
   "<Cmd>lua require('utils/mappings/normal/terminal').toggle()<CR>",
   { silent = true }
 )
 map(
   'i',
-  '<M-z>',
+  '<leader>r',
   "<Esc><Cmd>lua require('utils/mappings/normal/terminal').toggle()<CR>",
   { silent = true }
 )

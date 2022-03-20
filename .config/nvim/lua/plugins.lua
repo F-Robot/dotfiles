@@ -12,6 +12,7 @@ return require('packer').startup(function(use)
   -- Typing
   use('windwp/nvim-autopairs')
   use('tpope/vim-surround')
+  use('tpope/vim-repeat')
   use('numToStr/Comment.nvim')
   -- UI
   use('mbbill/undotree')

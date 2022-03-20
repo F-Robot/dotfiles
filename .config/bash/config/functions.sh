@@ -8,7 +8,7 @@ function op() {
 }
 # Daemonize
 function dae() {
-	daemonize "$(command -v "$1")"
+	daemonize "$(which "$1")"
 }
 # Generate authentication keys for SSH.
 function gen-ssh-keygen-ed25519() {
@@ -44,7 +44,7 @@ function firebase-deploy() {
 			;;
 		2)
 			echo "Deploying to prueba"
-			firebase hosting:channel:list prueba
+			firebase hosting:channel:deploy prueba
 			;;
 		3)
 			echo "List deploys"

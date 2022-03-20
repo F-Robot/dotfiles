@@ -13,7 +13,7 @@ local capabilities = cmp_capabilities.update_capabilities(
   lsp.protocol.make_client_capabilities()
 )
 
-local function handle_attach()
+local function handle_attach(client)
   local opts = { silent = true }
   buf_map('n', 'K', '<Cmd>LspHover<CR>', opts)
   buf_map('n', 'J', '<Cmd>LspDiagLine<CR>', opts)
@@ -26,6 +26,8 @@ local function handle_attach()
   buf_map('n', '[g', '<Cmd>LspDiagPrev<CR>', opts)
   buf_map('n', ']g', '<Cmd>LspDiagNext<CR>', opts)
   buf_map('i', '<C-k>', '<Cmd>LspSignatureHelp<CR>', opts)
+  -- client.resolved_capabilities.document_formatting = false
+  client.resolved_capabilities.document_range_formatting = false
 end
 
 diagnostic.config({
@@ -56,6 +58,13 @@ lspconfig.bashls.setup({
   capabilities = capabilities,
 })
 
+-- JS/TS language Server
+lspconfig.tsserver.setup({
+  on_attach = handle_attach,
+  capabilities = capabilities,
+  init_options = {
+  }
+})
 -- Html language Server
 lspconfig.html.setup({
   on_attach = handle_attach,
@@ -76,7 +85,12 @@ lspconfig.jsonls.setup({
     },
   },
 })
--- Vue language Server
+-- Volar language Server
+-- lspconfig.volar.setup({
+--   on_attach = handle_attach_without_formatting,
+--   capabilities = capabilities,
+-- })
+-- Vuels language Server
 lspconfig.vuels.setup({
   on_attach = handle_attach,
   capabilities = capabilities,

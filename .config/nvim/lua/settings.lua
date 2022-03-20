@@ -16,6 +16,7 @@ g.tokyonight_hide_inactive_statusline = true -- Hide inactive statuslines
 cmd([[colorscheme tokyonight]]) -- Colorscheme TokyoNight
 
 -- Buffer Options
+opt.clipboard = 'unnamedplus' -- Number of spaces that a <Tab> in the file counts for.
 opt.tabstop = 2 -- Number of spaces that a <Tab> in the file counts for.
 opt.shiftwidth = 2 -- Number of spaces to use for each step of auto indent.
 opt.expandtab = true -- Use spaces instead of tab characters.
