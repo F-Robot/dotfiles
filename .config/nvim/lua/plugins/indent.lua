@@ -12,11 +12,11 @@ indent_blankline.setup({
   buftype_exclude = { 'terminal', 'nofile' },
   filetype_exclude = { 'help', 'man' },
   char_highlight_list = {
-    'IndentBlanklineIndent1',
+    'IndentBlanklineIndent5',
     'IndentBlanklineIndent2',
     'IndentBlanklineIndent3',
-    'IndentBlanklineIndent4',
-    'IndentBlanklineIndent5',
     'IndentBlanklineIndent6',
+    'IndentBlanklineIndent4',
+    'IndentBlanklineIndent1',
   },
 })

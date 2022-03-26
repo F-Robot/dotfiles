@@ -69,4 +69,4 @@ alias nb="npm run build"
 alias ne="npm run deploy"
 
 # Firebase
-alias fd="firebase deploy"
+# alias fd="firebase deploy"

@@ -16,7 +16,6 @@ g.tokyonight_hide_inactive_statusline = true -- Hide inactive statuslines
 cmd([[colorscheme tokyonight]]) -- Colorscheme TokyoNight
 
 -- Buffer Options
-opt.clipboard = 'unnamedplus' -- Number of spaces that a <Tab> in the file counts for.
 opt.tabstop = 2 -- Number of spaces that a <Tab> in the file counts for.
 opt.shiftwidth = 2 -- Number of spaces to use for each step of auto indent.
 opt.expandtab = true -- Use spaces instead of tab characters.
@@ -31,13 +30,13 @@ opt.number = true -- Persist undo history to an undo file.
 
 -- Global Options
 opt.laststatus = 0 -- Disable status-line.
-opt.statusline = ' ' -- Disable built-in status-line string for splits.
+opt.statusline = '' -- Disable built-in status-line string for splits.
 opt.ignorecase = true -- Ignore case in search patterns.
 opt.smartcase = true -- Set 'noignorecase' if search pattern contains an uppercase letter.
 opt.scrolloff = 5 -- Minimum number of screen lines to keep above and below the cursor.
 opt.sidescroll = 5 -- Columns to scroll horizontally when cursor is moved off the screen.
 opt.sidescrolloff = 5 -- Minimum number of screen columns to keep to cursor right.
-opt.pumheight = 6 -- Maximum number of items to show in the popup menu.
+opt.pumheight = 7 -- Maximum number of items to show in the popup menu.
 opt.updatetime = 500 -- Trigger CursorHold event faster.
 opt.timeoutlen = 500 -- Time in milliseconds to wait for a mapped sequence to complete.
 opt.ttimeoutlen = 0 -- Time in milliseconds to wait for a key code sequence to complete.

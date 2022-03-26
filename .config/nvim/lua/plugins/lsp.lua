@@ -1,4 +1,5 @@
 local lspconfig = require('lspconfig')
+local ts_utils = require('nvim-lsp-ts-utils')
 local null_ls = require('null-ls')
 local buf_map = require('utils/utils').buf_map
 local cmp_capabilities = require('cmp_nvim_lsp')
@@ -26,8 +27,47 @@ local function handle_attach(client)
   buf_map('n', '[g', '<Cmd>LspDiagPrev<CR>', opts)
   buf_map('n', ']g', '<Cmd>LspDiagNext<CR>', opts)
   buf_map('i', '<C-k>', '<Cmd>LspSignatureHelp<CR>', opts)
-  -- client.resolved_capabilities.document_formatting = false
+  client.resolved_capabilities.document_formatting = false
   client.resolved_capabilities.document_range_formatting = false
+end
+
+local function handle_attach_ts(client)
+  local opts = { silent = true }
+  buf_map('n', 'K', '<Cmd>LspHover<CR>', opts)
+  buf_map('n', 'J', '<Cmd>LspDiagLine<CR>', opts)
+  buf_map('n', 'gd', '<Cmd>LspDef<CR>', opts)
+  buf_map('n', 'gr', '<Cmd>LspRefs<CR>', opts)
+  buf_map('n', 'gn', '<Cmd>LspRename<CR>', opts)
+  buf_map('n', 'ga', '<Cmd>LspCodeAction<CR>', opts)
+  buf_map('n', 'gf', '<Cmd>LspFormatting<CR>', opts)
+  buf_map('n', 'gm', '<Cmd>LspImplementation<CR>', opts)
+  buf_map('n', '[g', '<Cmd>LspDiagPrev<CR>', opts)
+  buf_map('n', ']g', '<Cmd>LspDiagNext<CR>', opts)
+  buf_map('i', '<C-k>', '<Cmd>LspSignatureHelp<CR>', opts)
+  buf_map('n', 'gs', '<Cmd>TSLspOrganize<CR>', opts)
+  buf_map('n', 'gr', '<Cmd>TSLspRenameFile<CR>', opts)
+  buf_map('n', 'gi', '<Cmd>TSLspImportAll<CR>', opts)
+  client.resolved_capabilities.document_formatting = false
+  client.resolved_capabilities.document_range_formatting = false
+  ts_utils.setup({
+    auto_inlay_hints = false
+  })
+  ts_utils.setup_client(client)
+end
+
+local function handle_attach_with_formatting()
+  local opts = { silent = true }
+  buf_map('n', 'K', '<Cmd>LspHover<CR>', opts)
+  buf_map('n', 'J', '<Cmd>LspDiagLine<CR>', opts)
+  buf_map('n', 'gd', '<Cmd>LspDef<CR>', opts)
+  buf_map('n', 'gr', '<Cmd>LspRefs<CR>', opts)
+  buf_map('n', 'gn', '<Cmd>LspRename<CR>', opts)
+  buf_map('n', 'ga', '<Cmd>LspCodeAction<CR>', opts)
+  buf_map('n', 'gf', '<Cmd>LspFormatting<CR>', opts)
+  buf_map('n', 'gi', '<Cmd>LspImplementation<CR>', opts)
+  buf_map('n', '[g', '<Cmd>LspDiagPrev<CR>', opts)
+  buf_map('n', ']g', '<Cmd>LspDiagNext<CR>', opts)
+  buf_map('i', '<C-k>', '<Cmd>LspSignatureHelp<CR>', opts)
 end
 
 diagnostic.config({
@@ -57,13 +97,11 @@ lspconfig.bashls.setup({
   on_attach = handle_attach,
   capabilities = capabilities,
 })
-
 -- JS/TS language Server
 lspconfig.tsserver.setup({
-  on_attach = handle_attach,
+  init_options = ts_utils.init_options,
+  on_attach = handle_attach_ts,
   capabilities = capabilities,
-  init_options = {
-  }
 })
 -- Html language Server
 lspconfig.html.setup({
@@ -97,11 +135,6 @@ lspconfig.vuels.setup({
   init_options = {
     config = {
       vetur = {
-        completion = {
-          autoImport = true,
-          tagCasing = 'kebab',
-          useScaffoldSnippets = false,
-        },
         validation = {
           script = false,
           style = false,
@@ -111,7 +144,6 @@ lspconfig.vuels.setup({
     },
   },
 })
-
 -- Lua Language Server
 lspconfig.sumneko_lua.setup({
   on_attach = handle_attach,
@@ -148,7 +180,7 @@ local sources = {
   null_ls.builtins.formatting.stylua.with(formatting_stylua),
 }
 null_ls.setup({
-  on_attach = handle_attach,
+  on_attach = handle_attach_with_formatting,
   capabilities = capabilities,
   sources = sources,
 })

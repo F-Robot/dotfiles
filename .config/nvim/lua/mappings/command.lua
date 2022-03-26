@@ -7,7 +7,7 @@ map('c', '<C-h>', '<Left>')
 map('c', '<C-l>', '<Right>')
 
 -- Substitute “pattern” on the current line.
-map('c', ';s', 's//<Left>')
+map('c', ';s', 's///g<Left><Left><Left>')
 
 -- Substitute “pattern” in the current file.
 map('c', ';g', '%s//<Left>')

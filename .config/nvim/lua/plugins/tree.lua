@@ -11,22 +11,21 @@ g.nvim_tree_group_empty = 1
 
 nvim_tree.setup({
   disable_netrw = true,
-  hijack_cursor = true,
   auto_close = true,
   git = {
     enable = false,
   },
   view = {
-    width = 25,
-    signcolumn = 'no',
+    width = 23,
+    signcolumn = 'yes',
     hide_root_folder = true,
+    preserve_window_proportions = true,
   },
   open_file = {
     quit_on_open = true
   }
 })
 
-cmd('highlight! NvimTreeNormal guibg=NONE')
 -- Nvim Tree
 map('n', '<leader>t', '<Cmd>NvimTreeToggle<CR>', { silent = true })
 map('n', '<leader>T', '<Cmd>NvimTreeRefresh<CR>', { silent = true })

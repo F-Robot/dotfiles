@@ -1,12 +1,7 @@
 local bufferline = require('bufferline')
 local map = require('utils/utils').map
 
--- local diagnostic_icons = function(count, level)
---   local icon = level:match('error') and ' ' or ' '
---   return ' ' .. icon .. count
--- end
-
-local diagnostics_indicator = function(count, level, diagnostics_dict, context)
+local diagnostics_indicator = function(count, level, diagnostics_dict)
   local s = ' '
   for e, n in pairs(diagnostics_dict) do
     local sym = e == 'error' and ' ' or (e == 'warning' and ' ' or '')
@@ -17,11 +12,13 @@ end
 
 bufferline.setup({
   options = {
-    show_buffer_close_icons = false,
     show_close_icon = false,
+    indicator_icon = '',
+    tab_size = 25,
     diagnostics = 'nvim_lsp',
     modified_icon = '🞄',
     enforce_regular_tabs = true,
+    separator_style = "thin",
     diagnostics_indicator = diagnostics_indicator,
     offsets = {
       {

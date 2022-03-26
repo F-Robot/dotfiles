@@ -14,10 +14,19 @@ map('n', ']b', '<Cmd>bnext<CR>', { silent = true })
 map('n', '[b', '<Cmd>bprevious<CR>', { silent = true })
 
 -- Close buffer
-map('n', '<leader>c', '<Cmd>bw!<CR>', { silent = true })
+map('n', '<leader>c', '<Cmd>bd!<CR>', { silent = true })
+
+-- Search yanked text
+map('n', '<leader>u', 'ye/<C-R>"<CR>')
 
 -- Search yanked text
 map('n', '<leader>y', '/<C-R>"<CR>')
+
+-- Search and replace under cursor word
+map('n', '<leader>su', 'ye:%s/<C-R>"/<C-R>"/<left>')
+
+-- Search and replace yanked text
+map('n', '<leader>sy', ':%s/<C-R>"/<C-R>"/<left>')
 
 -- Comment and uncomment operator.
 map('n', 'gc', '<Cmd>set operatorfunc=mappings#operator#comment#<CR>g@', {
