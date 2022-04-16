@@ -1,0 +1,5 @@
+# theme
+--theme="ansi-dark"
+
+# output style
+--style="numbers"
