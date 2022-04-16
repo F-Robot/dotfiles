@@ -1,9 +1,11 @@
 # `My Dotfiles` 
 
 ![neovim screenshot](https://user-images.githubusercontent.com/75826842/163684268-727340a6-276d-493c-89b5-a8164ebdbcf6.png)
+| ![lsd screenshot](https://user-images.githubusercontent.com/75826842/163689506-c7208b76-ac37-4351-8ed6-ba704116891e.png) | ![bat screenshot](https://user-images.githubusercontent.com/75826842/163689556-cdef4dec-39c8-4b08-a375-87e37d53d484.png) | ![kitty screenshot](https://user-images.githubusercontent.com/75826842/163689588-5bb0b1e3-54d1-4591-a294-8ad070d63352.png) |
+| ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
 
 ## Overview
-
+- [`kitty`](https://github.com/kovidgoyal/kitty) - Cross-platform, fast, feature-rich, GPU based terminal uitous text editor focused on extensibility and usability
 - [`neovim`](https://github.com/neovim/neovim) - The fork of ubiquitous text editor focused on extensibility and usability
   - [`autopairs`](https://github.com/windwp/nvim-autopairs) - Auto pair plugin
   - [`bufferline`](https://github.com/akinsho/nvim-bufferline.lua) - Bufferline
@@ -42,6 +44,8 @@
 - [`less`](http://www.greenwoodsoftware.com/less) - Standard file pager for Unix-like systems
 - [`curl`](https://github.com/curl/curl) - Tool for transferring data using various protocols
 - [`fzf`](https://github.com/junegunn/fzf) - General-purpose fuzzy finder that can be used among other Unix tools
+- [`lsd`](https://github.com/Peltoche/lsd) - The next gen ls command ools
+- [`bat`](https://github.com/sharkdp/bat) - A cat(1) clone with wings
 - [`htop`](https://github.com/hishamhm/htop) - Interactive text-based system monitor, process viewer and process manager
 - [`trash-cli`](https://github.com/andreafrancia/trash-cli) - Move files and folders to the trash
 
