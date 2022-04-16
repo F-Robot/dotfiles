@@ -1,1 +1,1 @@
-/home/ricardo/.commitlintrc.json
+{ "extends": ["@commitlint/config-conventional"] }

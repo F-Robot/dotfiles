@@ -1,1 +1,6 @@
-/home/ricardo/.config/starship.toml
+add_newline = false
+
+
+[character]
+success_symbol = "[Ψ]($style)"
+error_symbol = "[Ω]($style)"

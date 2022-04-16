@@ -1,1 +1,4 @@
-/home/ricardo/.prettierrc.json
+{
+  "semi": false,
+  "singleQuote": true
+}
