@@ -47,5 +47,3 @@
 
 ## Inspired by
 [Kutsan](https://github.com/kutsan/dotfiles)
-
-GPL-3.0
