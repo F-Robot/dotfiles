@@ -8,13 +8,20 @@ return require('packer').startup(function(use)
   use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
   -- Filesystem
   use('ibhagwan/fzf-lua')
+  use('antoinemadec/FixCursorHold.nvim')
   -- Typing
   use('tpope/vim-surround')
+  use('tpope/vim-repeat')
   use('windwp/nvim-autopairs')
   use('numToStr/Comment.nvim')
   -- UI
   use('mbbill/undotree')
-  use({ 'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons' })
+  use('kyazdani42/nvim-tree.lua')
+  use({
+    'akinsho/bufferline.nvim',
+    tag = 'v1.*',
+    requires = 'kyazdani42/nvim-web-devicons',
+  })
   -- Git
   use('tpope/vim-fugitive')
   use({ 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim' })
@@ -33,4 +40,5 @@ return require('packer').startup(function(use)
   -- LSP
   use('neovim/nvim-lspconfig')
   use('jose-elias-alvarez/null-ls.nvim')
+  use('jose-elias-alvarez/nvim-lsp-ts-utils')
 end)

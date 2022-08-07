@@ -22,7 +22,7 @@ end
 local supertab = function(fallback)
   if cmp.visible() then
     cmp.select_next_item()
-  elseif luasnip.expand_or_locally_jumpable() then
+  elseif luasnip.expand_or_jumpable() then
     luasnip.expand_or_jump()
   elseif has_words_before() then
     cmp.complete()
@@ -54,6 +54,7 @@ cmp.setup({
     ['<C-e>'] = cmp.mapping.close(),
     ['<Tab>'] = cmp.mapping(supertab, { 'i', 's' }),
     ['<S-Tab>'] = cmp.mapping(shift_supertab, { 'i', 's' }),
+    ['<C-Space>'] = cmp.mapping.complete(),
     ['<CR>'] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Insert,
       select = false,
@@ -71,10 +72,10 @@ cmp.setup({
     }),
   },
   sources = cmp.config.sources({
-    { name = 'path' },
-    { name = 'buffer' },
-    { name = 'luasnip' },
     { name = 'nvim_lsp' },
+    { name = 'buffer' },
+    { name = 'path' },
+    { name = 'luasnip' },
     { name = 'nvim_lsp_signature_help' },
   }),
 })

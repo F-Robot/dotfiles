@@ -7,6 +7,7 @@ fzf_lua.setup({
       default = 'bat_native',
       scrollbar = 'float',
       delay = 10,
+      border = 'noborder'
     },
   },
 })

@@ -3,10 +3,10 @@ local opt = vim.opt
 local cmd = vim.cmd
 local fn = vim.fn
 local g = vim.g
-local o = vim.o
 
 -- Mapleader
 g.mapleader = ','
+g.python3_host_prog = '/user/bin/python3'
 
 -- Autocmds
 cmd([[source ~/.config/nvim/lua/autocmds.vim]])
@@ -22,6 +22,7 @@ opt.expandtab = true -- Use spaces instead of tab characters.
 opt.undofile = true -- Persist undo history to an undo file.
 opt.swapfile = false
 opt.autowrite = true
+opt.grepprg = 'rg --vimgrep --smart-case --follow'
 
 -- Window Options
 opt.signcolumn = 'yes' -- Always draw the sign column even there is no sign in it.
@@ -30,6 +31,7 @@ opt.relativenumber = true -- Persist undo history to an undo file.
 opt.number = true -- Persist undo history to an undo file.
 
 -- Global Options
+g.cursorhold_updatetime = 50
 opt.laststatus = 0 -- Disable status-line.
 opt.statusline = '' -- Disable built-in status-line string for splits.
 opt.ignorecase = true -- Ignore case in search patterns.
@@ -85,6 +87,7 @@ g.loaded_getscriptPlugin = true
 g.loaded_logipat = true
 g.loaded_tutor_mode_plugin = true
 
+-- Fancy Quickfix Windows
 function _G.qftf(info)
   local items
   local ret = {}
@@ -94,8 +97,8 @@ function _G.qftf(info)
     items = fn.getloclist(info.winid, { id = info.id, items = 0 }).items
   end
   local limit = 31
-  local fname_fmt1, fname_fmt2 = '%-' .. limit .. 's', '…%.' .. (limit - 1) .. 's'
-  local valid_fmt = '%s │%5d:%-3d│%s %s'
+  local fnameFmt1, fnameFmt2 = '%-' .. limit .. 's', '…%.' .. (limit - 1) .. 's'
+  local validFmt = '%s │%5d:%-3d│%s %s'
   for i = info.start_idx, info.end_idx do
     local e = items[i]
     local fname = ''
@@ -110,15 +113,15 @@ function _G.qftf(info)
         end
         -- char in fname may occur more than 1 width, ignore this issue in order to keep performance
         if #fname <= limit then
-          fname = fname_fmt1:format(fname)
+          fname = fnameFmt1:format(fname)
         else
-          fname = fname_fmt2:format(fname:sub(1 - limit))
+          fname = fnameFmt2:format(fname:sub(1 - limit))
         end
       end
       local lnum = e.lnum > 99999 and -1 or e.lnum
       local col = e.col > 999 and -1 or e.col
       local qtype = e.type == '' and '' or ' ' .. e.type:sub(1, 1):upper()
-      str = valid_fmt:format(fname, lnum, col, qtype, e.text)
+      str = validFmt:format(fname, lnum, col, qtype, e.text)
     else
       str = e.text
     end
@@ -127,5 +130,4 @@ function _G.qftf(info)
   return ret
 end
 
-opt.qftf = ' '
-o.qftf = '{info -> v:lua._G.qftf(info)}'
+vim.o.qftf = '{info -> v:lua._G.qftf(info)}'

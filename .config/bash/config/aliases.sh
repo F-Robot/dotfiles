@@ -7,6 +7,7 @@ alias discord="dae discord"
 alias thunderbird="dae birdtray"
 alias ytmusic="dae youtube-music-desktop-app"
 alias notion="dae notion-snap"
+alias todo="cd && nv ~/Documents/Shopnet/toDoList.txt"
 
 # Shortcuts Aliases
 alias st="firefox && whap && thunderbird && notion && ytmusic"
@@ -18,6 +19,7 @@ alias rm="trash" # Use 'trash' command instead 'rm'
 alias apt="sudo apt"
 alias snap="sudo snap"
 alias dpkg="sudo dpkg"
+alias docker="sudo docker"
 alias deact="deactivate"
 alias mkdir="mkdir --parents"         # Make missing parent directories when creating folders
 alias mv="mv --interactive --verbose" # Move nodes with interactive mode and extra verbosity.
@@ -35,17 +37,20 @@ alias update="apt update -y && apt upgrade -y"
 alias kitty-update="curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin"
 alias clean="apt autoremove && apt autopurge"
 alias install="apt install"
+alias search="apt search"
 alias sb="source ~/.bashrc"
 alias act="source venv/bin/activate"
 alias hi="npx husky-init && npm install"
 alias hr="rm ./.husky/pre-commit && npx husky add .husky/commit-msg 'npx --no-install commitlint --edit \"$1\"'"
 
-# List Aliases
+# LSD
 alias ls="lsd"
 alias ll='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
 alias lt='ls --tree'
+
+# LS
 # alias ls="ls --color=auto"
 # alias ll="ls -alF"
 # alias la="ls -A"
@@ -53,7 +58,7 @@ alias lt='ls --tree'
 
 ## Git
 alias gl="git log --oneline"
-alias ga="git add ."
+alias ga="git add"
 alias gb="git branch"
 alias gs="git status"
 alias ge="git checkout"
@@ -76,10 +81,20 @@ alias nt="npm run test"
 alias nb="npm run build"
 alias ne="npm run deploy"
 
+# PM2
+alias psa="pm2 start npm -- start"
+alias psd="pm2 start npm -- run dev"
+alias pso="pm2 stop"
+alias pli="pm2 list"
+alias plo="pm2 log"
+alias pr="pm2 restart"
+alias pd="pm2 delete" 
+
 # Conditional aliases
 if command -v batcat &>/dev/null; then
 	alias cat="bat"
 else
-	echo "Error: aliases.sh"
-	echo "bat command not exists"
+  echo "batcat command does not exist :("
 fi
+
+alias fdp="nb && firebase hosting:channel:deploy prueba"

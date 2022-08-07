@@ -8,8 +8,8 @@ mkcd() {
 function vol() {
 	pactl -- set-sink-volume "$1" "$2"%
 }
-function op() {
-	echo $(("$1"))
+function pyc() {
+	python3.9 -c "print($1)"
 }
 # Daemonize
 function dae() {
@@ -32,10 +32,8 @@ function pdf() {
 function firebase-deploy() {
 	# Menu
 	echo "Select a deploy:"
-	echo "1. Deploy to Master"
-	echo "2. Deploy to Prueba"
-	echo "3. List deploys"
-	echo "4. Exit"
+	echo "1. Deploy to Prueba"
+	echo "2. List deploys"
 	echo -n "Enter a option [1-4]:"
 
 	# Infinite Loop while select a correct choice
@@ -44,20 +42,12 @@ function firebase-deploy() {
 		# Case statement options
 		case $choice in
 		1)
-			echo "Deploying to master"
-			firebase deploy
-			;;
-		2)
 			echo "Deploying to prueba"
 			firebase hosting:channel:deploy prueba
 			;;
-		3)
+		2)
 			echo "List deploys"
 			firebase hosting:channel:list
-			;;
-		4)
-			echo "Quitting ..."
-			exit
 			;;
 		*) echo "Invalid Option, try again ..." ;;
 		esac
