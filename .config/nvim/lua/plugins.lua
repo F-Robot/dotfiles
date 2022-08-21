@@ -6,6 +6,7 @@ return require('packer').startup(function(use)
   use('norcalli/nvim-colorizer.lua')
   use('lukas-reineke/indent-blankline.nvim')
   use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
+  use('nikvdp/ejs-syntax')
   -- Filesystem
   use('ibhagwan/fzf-lua')
   use('antoinemadec/FixCursorHold.nvim')

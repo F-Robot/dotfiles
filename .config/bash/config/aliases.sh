@@ -5,7 +5,7 @@ alias firefox="dae firefox"
 alias whap="dae whatsdesk"
 alias discord="dae discord"
 alias thunderbird="dae birdtray"
-alias ytmusic="dae youtube-music-desktop-app"
+alias ytmusic="dae ~/Applications/Music.AppImage"
 alias notion="dae notion-snap"
 alias todo="cd && nv ~/Documents/Shopnet/toDoList.txt"
 

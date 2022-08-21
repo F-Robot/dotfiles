@@ -168,26 +168,26 @@ lspconfig.jsonls.setup({
   },
 })
 -- Vuels language Server
--- lspconfig.vuels.setup({
---   on_attach = handle_attach,
---   capabilities = capabilities,
---   init_options = {
---     config = {
---       vetur = {
---         validation = {
---           script = false,
---           style = false,
---           template = false,
---         },
---       },
---     },
---   },
--- })
--- Volar language Server
-lspconfig.volar.setup({
+lspconfig.vuels.setup({
   on_attach = handle_attach,
   capabilities = capabilities,
+  init_options = {
+    config = {
+      vetur = {
+        validation = {
+          script = false,
+          style = false,
+          template = false,
+        },
+      },
+    },
+  },
 })
+-- Volar language Server
+-- lspconfig.volar.setup({
+--   on_attach = handle_attach,
+--   capabilities = capabilities,
+-- })
 -- Lua Language Server
 lspconfig.sumneko_lua.setup({
   on_attach = handle_attach,
