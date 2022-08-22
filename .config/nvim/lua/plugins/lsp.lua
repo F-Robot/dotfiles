@@ -108,11 +108,11 @@ diagnostic.config({
   severity_sort = true,
 })
 fn.sign_define('DiagnosticSignError', {
-  text = sign_char,
+  text = '',
   texthl = 'DiagnosticSignError',
 })
 fn.sign_define('DiagnosticSignWarn', {
-  text = sign_char,
+  text = '',
   texthl = 'DiagnosticSignWarn',
 })
 fn.sign_define('DiagnosticSignInfo', {
@@ -150,13 +150,6 @@ lspconfig.cssls.setup({
   on_attach = handle_attach,
   capabilities = capabilities,
 })
--- lspconfig.stylelint_lsp.setup({
---   settings = {
---     stylelintplus = {
---       -- see available options in stylelint-lsp documentation
---     },
---   },
--- })
 -- Json language Server
 lspconfig.jsonls.setup({
   on_attach = handle_attach,

@@ -2,7 +2,7 @@ return require('packer').startup(function(use)
   -- Packer
   use('wbthomason/packer.nvim')
   -- Colorschemes and Highlights
-  use('rebelot/kanagawa.nvim')
+  use({ 'catppuccin/nvim', as = 'catppuccin' })
   use('norcalli/nvim-colorizer.lua')
   use('lukas-reineke/indent-blankline.nvim')
   use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
@@ -17,10 +17,8 @@ return require('packer').startup(function(use)
   use('numToStr/Comment.nvim')
   -- UI
   use('mbbill/undotree')
-  use('kyazdani42/nvim-tree.lua')
   use({
     'akinsho/bufferline.nvim',
-    tag = 'v1.*',
     requires = 'kyazdani42/nvim-web-devicons',
   })
   -- Git

@@ -1,5 +1,4 @@
 local cmp = require('cmp')
-local luasnip = require('luasnip')
 local lspkind = require('lspkind')
 
 local has_words_before = function()
@@ -22,8 +21,6 @@ end
 local supertab = function(fallback)
   if cmp.visible() then
     cmp.select_next_item()
-  elseif luasnip.expand_or_jumpable() then
-    luasnip.expand_or_jump()
   elseif has_words_before() then
     cmp.complete()
   else
@@ -34,8 +31,6 @@ end
 local shift_supertab = function(fallback)
   if cmp.visible() then
     cmp.select_prev_item()
-  elseif luasnip.jumpable(-1) then
-    luasnip.jump(-1)
   else
     fallback()
   end
@@ -51,32 +46,33 @@ cmp.setup({
   mapping = {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-e>'] = cmp.mapping.close(),
+    ['<C-c>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm({ select = false }),
     ['<Tab>'] = cmp.mapping(supertab, { 'i', 's' }),
     ['<S-Tab>'] = cmp.mapping(shift_supertab, { 'i', 's' }),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Insert,
-      select = false,
-    }),
+  },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
   formatting = {
     format = lspkind.cmp_format({
       with_text = true,
       menu = {
-        buffer = '[BUF]',
-        nvim_lsp = '[LSP]',
-        path = '[PATH]',
-        luasnip = '[SNIP]',
+        buffer = '[BUF ]',
+        nvim_lsp = '[LSP ]',
+        path = '[PATH ]',
+        luasnip = '[SNIP ]',
+        nvim_lsp_signature_help = '[SIGN ]',
       },
     }),
   },
   sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'buffer' },
-    { name = 'path' },
-    { name = 'luasnip' },
     { name = 'nvim_lsp_signature_help' },
+    { name = 'path' },
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+    { name = 'buffer' },
   }),
 })
 cmp.setup.cmdline('/', {

@@ -12,5 +12,5 @@ map('c', ';s', 's///g<Left><Left><Left>')
 -- Substitute “pattern” in the current file.
 map('c', ';g', '%s//<Left>')
 
--- Substitute “pattern” in the current file.
-map('c', ';i', 'source ~/.config/nvim/init.lua<CR>')
+-- Source current file
+map('c', ';s', 'source %:p<CR>')

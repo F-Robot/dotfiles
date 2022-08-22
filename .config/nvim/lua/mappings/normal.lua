@@ -16,6 +16,10 @@ map('n', '[b', '<Cmd>bprevious<CR>', { silent = true })
 -- Close buffer
 map('n', '<leader>c', '<Cmd>bd!<CR>', { silent = true })
 
+-- Copy and Paste from + register
+map('v', '<c-c>', '"+y')
+map('n', '<c-v>', '"+p')
+
 -- Search under cursor word
 map('n', '<leader>u', 'yiw/<C-R>"<CR>')
 

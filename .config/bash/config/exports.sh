@@ -23,17 +23,3 @@ export FZF_CTRL_R_OPTS="--height 40% --layout=reverse --ansi"
 
 # GCC
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# less
-# export LESS="\
-#   --ignore-case \
-#   --tilde \
-#   --chop-long-lines \
-#   --status-column \
-#   --LONG-PROMPT \
-#   --jump-target=10 \
-#   --RAW-CONTROL-CHARS \
-#   --clear-screen \
-#   --tabs=4 \
-#   --shift=5"
-# export LESSHISTFILE='-' # Disable history.

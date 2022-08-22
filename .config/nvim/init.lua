@@ -1,7 +1,7 @@
 -- General
 require('settings')
 require('commands')
-require('plugins.kanagawa')
+require('plugins.catpuccin')
 
 -- Mapping
 require('mappings.normal')
@@ -11,7 +11,6 @@ require('mappings.command')
 require('plugins')
 require('plugins.fzf')
 require('plugins.cmp')
-require('plugins.tree')
 require('plugins.lsp')
 require('plugins.indent')
 require('plugins.luasnip')
