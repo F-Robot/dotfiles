@@ -1,25 +1,22 @@
 #!/bin/bash
 
-# GOLANG
-export GOPATH="$HOME/.go"
-
 # PATH
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$PATH:/usr/local/go/bin"
-export PATH="$PATH:$GOPATH/bin"
-export PATH="$HOME/.local/lib/lua-language-server/bin:$PATH"
-# Basics
-export EDITOR="nvim"
-export NVM_DIR="$HOME/.nvm"
-export PAGER='less'
-
-# FZF
-export FZF_ALT_C_COMMAND="fdfind --type d --hidden --color=always --exclude={.git,node_modules,build,*.png,*.jpg,.cache,venv,__pycache__,*.svg}"
-export FZF_CTRL_T_COMMAND="fdfind --type f --hidden --color=always --exclude={.git,node_modules,build,*.png,*.jpg,.cache,venv,__pycache__,*.svg}"
-
-export FZF_CTRL_T_OPTS="--height 40% --layout=reverse --ansi --preview 'bat --style numbers,changes --color=always {}'"
-export FZF_ALT_C_OPTS="--height 40% --layout=reverse --ansi"
-export FZF_CTRL_R_OPTS="--height 40% --layout=reverse --ansi"
 
 # GCC
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# Basics
+export PAGER='less'
+export EDITOR="nvim"
+export NVM_DIR="$HOME/.nvm"
+
+# FZF
+
+## Command
+export FZF_CTRL_T_COMMAND='fd --hidden --color always --type f'
+export FZF_CTRL_R_COMMAND='rg --color always'
+
+## Options
+export FZF_CTRL_T_OPTS='--layout reverse --ansi'
+export FZF_CTRL_R_OPTS='--layout reverse --ansi'

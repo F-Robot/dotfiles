@@ -1,223 +1,216 @@
-local lspconfig = require('lspconfig')
-local null_ls = require('null-ls')
-local ts_utils = require('nvim-lsp-ts-utils')
-local buf_map = require('utils/utils').buf_map
-local cmp_capabilities = require('cmp_nvim_lsp')
+local lspconfig = require("lspconfig")
+local cmp_capabilities = require("cmp_nvim_lsp")
 
 local fn = vim.fn
-local lsp = vim.lsp
+local env = vim.env
+local split = vim.split
 local diagnostic = vim.diagnostic
-
-local sign_char = '•' -- U+2022 BULLET
-
-local capabilities = cmp_capabilities.update_capabilities(
-  lsp.protocol.make_client_capabilities()
-)
-
-local function handle_attach(client)
-  local opts = { silent = true }
-  buf_map('n', 'K', '<Cmd>LspHover<CR>', opts)
-  buf_map('n', 'J', '<Cmd>LspDiagLine<CR>', opts)
-  buf_map('n', 'gd', '<Cmd>LspDef<CR>', opts)
-  buf_map('n', 'gr', '<Cmd>LspRefs<CR>', opts)
-  buf_map('n', 'gn', '<Cmd>LspRename<CR>', opts)
-  buf_map('n', 'ga', '<Cmd>LspCodeAction<CR>', opts)
-  buf_map('n', 'gf', '<Cmd>LspFormatting<CR>', opts)
-  buf_map('n', 'gi', '<Cmd>LspImplementation<CR>', opts)
-  buf_map('n', '[g', '<Cmd>LspDiagPrev<CR>', opts)
-  buf_map('n', ']g', '<Cmd>LspDiagNext<CR>', opts)
-  buf_map('i', '<C-k>', '<Cmd>LspSignatureHelp<CR>', opts)
-  client.resolved_capabilities.document_formatting = false
-  client.resolved_capabilities.document_range_formatting = false
-end
-local function handle_attach_with_formatting()
-  local opts = { silent = true }
-  buf_map('n', 'K', '<Cmd>LspHover<CR>', opts)
-  buf_map('n', 'J', '<Cmd>LspDiagLine<CR>', opts)
-  buf_map('n', 'gd', '<Cmd>LspDef<CR>', opts)
-  buf_map('n', 'gr', '<Cmd>LspRefs<CR>', opts)
-  buf_map('n', 'gn', '<Cmd>LspRename<CR>', opts)
-  buf_map('n', 'ga', '<Cmd>LspCodeAction<CR>', opts)
-  buf_map('n', 'gf', '<Cmd>LspFormatting<CR>', opts)
-  buf_map('n', 'gi', '<Cmd>LspImplementation<CR>', opts)
-  buf_map('n', '[g', '<Cmd>LspDiagPrev<CR>', opts)
-  buf_map('n', ']g', '<Cmd>LspDiagNext<CR>', opts)
-  buf_map('i', '<C-k>', '<Cmd>LspSignatureHelp<CR>', opts)
-end
-
-local function ts_utils_on_attach(client, bufnr)
-  ts_utils.setup({
-    debug = false,
-    disable_commands = false,
-    enable_import_on_completion = false,
-
-    -- import all
-    import_all_timeout = 5000, -- ms
-    -- lower numbers = higher priority
-    import_all_priorities = {
-      same_file = 1, -- add to existing import statement
-      local_files = 2, -- git files or files with relative path markers
-      buffer_content = 3, -- loaded buffer content
-      buffers = 4, -- loaded buffer names
-    },
-    import_all_scan_buffers = 100,
-    import_all_select_source = false,
-    -- if false will avoid organizing imports
-    always_organize_imports = true,
-
-    -- filter diagnostics
-    filter_out_diagnostics_by_severity = {},
-    filter_out_diagnostics_by_code = {},
-
-    -- inlay hints
-    auto_inlay_hints = true,
-    inlay_hints_highlight = 'Comment',
-    inlay_hints_priority = 200, -- priority of the hint extmarks
-    inlay_hints_throttle = 150, -- throttle the inlay hint request
-    inlay_hints_format = { -- format options for individual hint kind
-      Type = {},
-      Parameter = {},
-      Enum = {},
-      -- Example format customization for `Type` kind:
-      -- Type = {
-      --     highlight = "Comment",
-      --     text = function(text)
-      --         return "->" .. text:sub(2)
-      --     end,
-      -- },
-    },
-
-    -- update imports on file move
-    update_imports_on_move = false,
-    require_confirmation_on_move = false,
-    watch_dir = nil,
-  })
-  -- required to fix code action ranges and filter diagnostics
-  ts_utils.setup_client(client)
-  -- no default maps, so you may want to define some here
-  local opts = { silent = true }
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gs', ':TSLspOrganize<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', ':TSLspRenameFile<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', ':TSLspImportAll<CR>', opts)
-  -- defaults maps
-  handle_attach(client)
-end
+local lsp = vim.lsp
+local keymap = vim.keymap
 
 diagnostic.config({
-  virtual_text = false,
-  severity_sort = true,
-})
-fn.sign_define('DiagnosticSignError', {
-  text = '',
-  texthl = 'DiagnosticSignError',
-})
-fn.sign_define('DiagnosticSignWarn', {
-  text = '',
-  texthl = 'DiagnosticSignWarn',
-})
-fn.sign_define('DiagnosticSignInfo', {
-  text = sign_char,
-  texthl = 'DiagnosticSignInfo',
-})
-fn.sign_define('DiagnosticSignHint', {
-  text = sign_char,
-  texthl = 'DiagnosticSignHint',
+	virtual_text = false,
+	severity_sort = true,
 })
 
--- Bash language Server
-lspconfig.pylsp.setup({
-  on_attach = handle_attach_with_formatting,
-  capabilities = capabilities,
+local sign_char = "•"
+
+fn.sign_define("DiagnosticSignError", {
+	text = sign_char,
+	texthl = "DiagnosticSignError",
 })
--- Bash language Server
-lspconfig.bashls.setup({
-  on_attach = handle_attach,
-  capabilities = capabilities,
+fn.sign_define("DiagnosticSignWarn", {
+	text = sign_char,
+	texthl = "DiagnosticSignWarn",
 })
--- JS/TS language Server
+fn.sign_define("DiagnosticSignInfo", {
+	text = sign_char,
+	texthl = "DiagnosticSignInfo",
+})
+fn.sign_define("DiagnosticSignHint", {
+	text = sign_char,
+	texthl = "DiagnosticSignHint",
+})
+
+local capabilities = cmp_capabilities.default_capabilities(lsp.protocol.make_client_capabilities())
+
+local function handle_attach()
+	local map_opts = {
+		buffer = true,
+		silent = true,
+	}
+
+	local floating_windows_width = 55
+
+	keymap.set("n", "gd", function()
+		lsp.buf.definition()
+	end, map_opts)
+
+	keymap.set("n", "gD", function()
+		lsp.buf.declaration()
+	end, map_opts)
+
+	keymap.set("n", "gt", function()
+		lsp.buf.type_definition()
+	end, map_opts)
+
+	keymap.set("n", "gr", function()
+		lsp.buf.references()
+	end, map_opts)
+
+	keymap.set("n", "gi", function()
+		lsp.buf.implementation()
+	end, map_opts)
+
+	keymap.set("n", "ge", function()
+		lsp.buf.rename()
+	end, map_opts)
+
+	keymap.set("n", "K", function()
+		lsp.buf.hover()
+	end, map_opts)
+
+	keymap.set("n", "ga", function()
+		lsp.buf.code_action()
+	end, map_opts)
+
+	keymap.set("n", "gf", function()
+		vim.lsp.buf.format({
+			filter = function(server)
+				return server.name ~= "tsserver"
+			end,
+		})
+	end, map_opts)
+
+	keymap.set("i", "<C-k>", function()
+		lsp.buf.signature_help()
+	end, map_opts)
+
+	keymap.set("n", "J", function()
+		diagnostic.open_float(0, {
+			source = "always",
+			scope = "line",
+			header = false,
+			width = floating_windows_width,
+		})
+	end, map_opts)
+
+	keymap.set("n", "[g", function()
+		diagnostic.goto_prev({
+			float = {
+				source = "always",
+				width = floating_windows_width,
+			},
+		})
+	end, map_opts)
+
+	keymap.set("n", "]g", function()
+		diagnostic.goto_next({
+			float = {
+				source = "always",
+				width = floating_windows_width,
+			},
+		})
+	end, map_opts)
+end
+
 lspconfig.tsserver.setup({
-  init_options = ts_utils.init_options,
-  on_attach = ts_utils_on_attach,
-  capabilities = capabilities,
+	on_attach = handle_attach,
+	capabilities = capabilities,
 })
--- Html language Server
-lspconfig.html.setup({
-  on_attach = handle_attach,
-  capabilities = capabilities,
+lspconfig.volar.setup({
+	on_attach = handle_attach,
+	capabilities = capabilities,
 })
--- CSS language Server
-lspconfig.cssls.setup({
-  on_attach = handle_attach,
-  capabilities = capabilities,
-})
--- Json language Server
-lspconfig.jsonls.setup({
-  on_attach = handle_attach,
-  capabilities = capabilities,
-  settings = {
-    json = {
-      schemas = require('schemastore').json.schemas(),
-    },
-  },
-})
--- Vuels language Server
-lspconfig.vuels.setup({
-  on_attach = handle_attach,
-  capabilities = capabilities,
-  init_options = {
-    config = {
-      vetur = {
-        validation = {
-          script = false,
-          style = false,
-          template = false,
-        },
-      },
-    },
-  },
-})
--- Volar language Server
--- lspconfig.volar.setup({
---   on_attach = handle_attach,
---   capabilities = capabilities,
+-- lspconfig.vuels.setup({
+-- 	on_attach = handle_attach,
+-- 	capabilities = capabilities,
 -- })
--- Lua Language Server
-lspconfig.sumneko_lua.setup({
-  on_attach = handle_attach,
-  capabilities = capabilities,
-  settings = {
-    Lua = {
-      runtime = {
-        version = 'LuaJIT',
-        path = vim.split(package.path, ';'),
-      },
-      diagnostics = {
-        globals = { 'vim' },
-      },
-      workspace = {
-        library = vim.api.nvim_get_runtime_file('', true),
-      },
-      telemetry = {
-        enable = false,
-      },
-    },
-  },
+lspconfig.dockerls.setup({
+	on_attach = handle_attach,
+	capabilities = capabilities,
 })
--- Null Language Server
-local formatting_stylua = {
-  extra_args = { '--config-path', vim.fn.expand('~/.config/stylua.toml') },
-}
-local sources = {
-  -- Diagnostic
-  null_ls.builtins.diagnostics.eslint_d,
-  null_ls.builtins.diagnostics.shellcheck,
-  -- Formatting
-  null_ls.builtins.formatting.shfmt,
-  null_ls.builtins.formatting.prettierd,
-  null_ls.builtins.formatting.stylua.with(formatting_stylua),
-}
+lspconfig.pyright.setup({
+	on_attach = handle_attach,
+	capabilities = capabilities,
+	settings = {
+		{
+			python = {
+				typeCheckingMode = "strict",
+				useLibraryCodeForTypes = true,
+				pythonPlatform = "Linux",
+			},
+		},
+	},
+})
+lspconfig.cssls.setup({
+	on_attach = handle_attach,
+	capabilities = capabilities,
+})
+lspconfig.html.setup({
+	on_attach = handle_attach,
+	capabilities = capabilities,
+})
+lspconfig.tailwindcss.setup({
+	capabilities = capabilities,
+	on_attach = handle_attach,
+})
+lspconfig.jsonls.setup({
+	capabilities = capabilities,
+	on_attach = handle_attach,
+	settings = {
+		json = {
+			schemas = require("schemastore").json.schemas(),
+		},
+	},
+})
+lspconfig.sumneko_lua.setup({
+	on_attach = handle_attach,
+	capabilities = capabilities,
+	cmd = {
+		string.format("%s/.local/lib/lua-language-server/bin/lua-language-server", env.HOME),
+		"-E",
+		string.format("%s/.local/lib/lua-language-server/main.lua", env.HOME),
+	},
+	settings = {
+		Lua = {
+			runtime = {
+				version = "LuaJIT",
+				path = split(package.path, ";"),
+			},
+			diagnostics = {
+				globals = { "vim" },
+			},
+			workspace = {
+				library = {
+					[fn.expand("$VIMRUNTIME/lua")] = true,
+					[fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+				},
+			},
+			telemetry = { enable = false },
+		},
+	},
+})
+
+local null_ls = require("null-ls")
+local command_resolver = require("null-ls.helpers.command_resolver")
+
 null_ls.setup({
-  on_attach = handle_attach_with_formatting,
-  capabilities = capabilities,
-  sources = sources,
+	on_attach = handle_attach,
+	capabilities = capabilities,
+	diagnostics_format = "#{m} [#{c}]",
+	sources = {
+		null_ls.builtins.formatting.prettierd,
+		null_ls.builtins.formatting.black,
+		null_ls.builtins.formatting.stylua,
+		null_ls.builtins.formatting.stylelint.with({
+			dynamic_command = command_resolver.from_node_modules(),
+		}),
+
+		null_ls.builtins.diagnostics.eslint_d,
+		null_ls.builtins.diagnostics.luacheck,
+		null_ls.builtins.diagnostics.stylelint.with({
+			dynamic_command = command_resolver.from_node_modules(),
+		}),
+	},
 })

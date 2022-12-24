@@ -1,4 +1,4 @@
-local map = require('utils/utils').map
+local map = require("utils/utils").map
 
 -- Normal Mode
-map('x', 'q', '<Esc>')
+map("x", "q", "<Esc>")

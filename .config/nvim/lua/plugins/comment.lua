@@ -1,5 +1,3 @@
-local comment = require('Comment')
-
-comment.setup({
-  ignore = '^$',
+require("Comment").setup({
+	ignore = "^$",
 })
