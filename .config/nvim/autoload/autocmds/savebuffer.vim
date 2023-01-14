@@ -1,6 +1,7 @@
 ""
 " Save the current buffer while keeping marks.
 "
+" autocmd InsertLeave,TextChanged * call kutsan#autocmds#savebuffer#()
 ""
 function! autocmds#savebuffer#() abort
   if empty(&buftype)

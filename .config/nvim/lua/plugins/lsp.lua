@@ -2,34 +2,23 @@ local lspconfig = require("lspconfig")
 local cmp_capabilities = require("cmp_nvim_lsp")
 
 local fn = vim.fn
-local env = vim.env
-local split = vim.split
-local diagnostic = vim.diagnostic
 local lsp = vim.lsp
+local split = vim.split
 local keymap = vim.keymap
+local diagnostic = vim.diagnostic
+
+local function setDiagnosticSymbol(name, icon)
+	local hl = "DiagnosticSign" .. name
+	fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl })
+end
+
+setDiagnosticSymbol("Error", "")
+setDiagnosticSymbol("Info", "")
+setDiagnosticSymbol("Hint", "")
+setDiagnosticSymbol("Warn", "")
 
 diagnostic.config({
 	virtual_text = false,
-	severity_sort = true,
-})
-
-local sign_char = "•"
-
-fn.sign_define("DiagnosticSignError", {
-	text = sign_char,
-	texthl = "DiagnosticSignError",
-})
-fn.sign_define("DiagnosticSignWarn", {
-	text = sign_char,
-	texthl = "DiagnosticSignWarn",
-})
-fn.sign_define("DiagnosticSignInfo", {
-	text = sign_char,
-	texthl = "DiagnosticSignInfo",
-})
-fn.sign_define("DiagnosticSignHint", {
-	text = sign_char,
-	texthl = "DiagnosticSignHint",
 })
 
 local capabilities = cmp_capabilities.default_capabilities(lsp.protocol.make_client_capabilities())
@@ -75,7 +64,7 @@ local function handle_attach()
 	end, map_opts)
 
 	keymap.set("n", "gf", function()
-		vim.lsp.buf.format({
+		lsp.buf.format({
 			filter = function(server)
 				return server.name ~= "tsserver"
 			end,
@@ -167,11 +156,6 @@ lspconfig.jsonls.setup({
 lspconfig.sumneko_lua.setup({
 	on_attach = handle_attach,
 	capabilities = capabilities,
-	cmd = {
-		string.format("%s/.local/lib/lua-language-server/bin/lua-language-server", env.HOME),
-		"-E",
-		string.format("%s/.local/lib/lua-language-server/main.lua", env.HOME),
-	},
 	settings = {
 		Lua = {
 			runtime = {
@@ -179,12 +163,12 @@ lspconfig.sumneko_lua.setup({
 				path = split(package.path, ";"),
 			},
 			diagnostics = {
-				globals = { "vim" },
+				globals = { "vim", "require", "package", "pairs" },
 			},
 			workspace = {
 				library = {
 					[fn.expand("$VIMRUNTIME/lua")] = true,
-					[fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+					[fn.expand("$VIMRUNTIME/lua/lsp")] = true,
 				},
 			},
 			telemetry = { enable = false },
@@ -193,7 +177,6 @@ lspconfig.sumneko_lua.setup({
 })
 
 local null_ls = require("null-ls")
-local command_resolver = require("null-ls.helpers.command_resolver")
 
 null_ls.setup({
 	on_attach = handle_attach,
@@ -203,14 +186,9 @@ null_ls.setup({
 		null_ls.builtins.formatting.prettierd,
 		null_ls.builtins.formatting.black,
 		null_ls.builtins.formatting.stylua,
-		null_ls.builtins.formatting.stylelint.with({
-			dynamic_command = command_resolver.from_node_modules(),
-		}),
-
 		null_ls.builtins.diagnostics.eslint_d,
-		null_ls.builtins.diagnostics.luacheck,
-		null_ls.builtins.diagnostics.stylelint.with({
-			dynamic_command = command_resolver.from_node_modules(),
+		null_ls.builtins.diagnostics.luacheck.with({
+			extra_args = { "--globals", "vim" },
 		}),
 	},
 })

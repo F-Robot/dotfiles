@@ -1,5 +1,5 @@
 # theme
---theme="ansi-dark"
+--theme="OneHalfDark"
 
 # output style
 --style="numbers"

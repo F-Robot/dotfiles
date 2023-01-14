@@ -1,4 +1,3 @@
-local map = require("utils/utils").map
 local cmd = vim.cmd
 
 -- LSP Commands
@@ -13,6 +12,3 @@ cmd("command! LspSignatureHelp lua vim.lsp.buf.signature_help()")
 cmd('command! LspDiagPrev lua vim.diagnostic.goto_prev({ float = { source = "always", width = 55, border="single" }})')
 cmd('command! LspDiagNext lua vim.diagnostic.goto_next({ float = { source = "always", width = 55, border="single" }})')
 cmd('command! LspDiagLine lua vim.diagnostic.open_float(0, { source = "always", width = 55, border="single" })')
-
--- Refresh lsp
-map("n", "<leader>a", "<cmd>LspRestart<CR>")

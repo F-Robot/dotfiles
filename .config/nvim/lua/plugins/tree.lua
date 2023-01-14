@@ -1,5 +1,3 @@
-local map = require("utils/utils").map
-
 require("nvim-tree").setup({
 	disable_netrw = true,
 	hijack_cursor = true,
@@ -17,7 +15,7 @@ require("nvim-tree").setup({
 				git = false,
 			},
 		},
-    symlink_destination = false,
+		symlink_destination = false,
 	},
 	git = {
 		enable = false,
@@ -26,5 +24,7 @@ require("nvim-tree").setup({
 	},
 })
 
+local keymap = vim.keymap
+
 -- Toggle
-map("n", "<space>t", "<Cmd>NvimTreeToggle<CR>")
+keymap.set("n", "<leader>t", "<cmd>NvimTreeToggle<cr>")

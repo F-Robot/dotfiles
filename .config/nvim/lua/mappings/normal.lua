@@ -1,38 +1,35 @@
-local map = require("utils/utils").map
-
--- Quiet
-map("n", "<leader>q", "<Cmd>q<CR>")
-
--- Save
-map("n", "<leader>w", "<Cmd>w<CR>")
+local keymap = vim.keymap
 
 -- Disable Highligth
-map("n", "<Leader>n", "<Cmd>nohlsearch<CR>", { silent = true })
+keymap.set("n", "<leader>n", "<cmd>nohlsearch<cr>", { silent = true })
 
--- Close buffer
-map("n", "<leader>c", "<Cmd>bd!<CR>", { silent = true })
+-- close buffer
+keymap.set("n", "<leader>c", "<cmd>bd!<cr>", { silent = true })
 
--- Close buffer
-map("n", "<leader>t", "yslt", { silent = true })
+-- Write buffer
+keymap.set("n", "<leader>w", "<cmd>w<cr>", { silent = true })
 
--- Search under cursor word
-map("n", "<leader>u", 'yiw/\\<<C-R>"\\><CR>')
+-- search under cursor word
+keymap.set("n", "<leader>u", 'yiw/\\<<c-R>"\\><cr>')
 
--- Search yanked text
-map("n", "<leader>y", '/<C-R>"<CR>')
+-- search and replace under cursor word
+keymap.set("n", "<leader>su", 'yiw:%s/<c-R>"/<C-R>"/<left>')
 
--- Search and replace under cursor word
-map("n", "<leader>ru", 'yiw:%s/<C-R>"/<C-R>"/<left>')
+-- close window.
+keymap.set("n", "<space>q", "<cmd>quit<cr>", { silent = true })
 
--- Search and replace yanked text
-map("n", "<leader>ry", ':%s/<C-R>"/<C-R>"/<left>')
+-- Window nagivation.
+keymap.set("n", "<c-j>", "<C-w>j")
+keymap.set("n", "<c-k>", "<C-w>k")
+keymap.set("n", "<c-h>", "<C-w>h")
+keymap.set("n", "<c-l>", "<C-w>l")
 
--- Pane nagivation.
-map("n", "<C-j>", "<C-w>j")
-map("n", "<C-k>", "<C-w>k")
-map("n", "<C-h>", "<C-w>h")
-map("n", "<C-l>", "<C-w>l")
+-- Resize current window sizes.
+keymap.set("n", "<s-Up>", "2<c-w>+")
+keymap.set("n", "<s-Down>", "2<c-w>-")
+keymap.set("n", "<s-Right>", "2<c-w>>")
+keymap.set("n", "<s-Left>", "2<c-w><")
 
 -- Add [count] blank lines above or below the cursor.
-map("n", "[<Space>", "<Cmd>put! =repeat(nr2char(10), v:count1) <Bar> ']+1<CR>", { silent = true })
-map("n", "]<Space>", "<Cmd>put =repeat(nr2char(10), v:count1) <Bar> '[-1<CR>", { silent = true })
+keymap.set("n", "[<space>", "<cmd>put! =repeat(nr2char(10), v:count1) <Bar> ']+1<cr>", { silent = true })
+keymap.set("n", "]<space>", "<cmd>put =repeat(nr2char(10), v:count1) <Bar> '[-1<cr>", { silent = true })

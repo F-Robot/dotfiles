@@ -30,11 +30,15 @@ require("gitsigns").setup({
 		end, { expr = true })
 
 		-- Actions
-		map("n", "<leader>sw", gs.preview_hunk)
-		map("n", "<leader>su", gs.undo_stage_hunk)
-		map({ "n", "v" }, "<leader>ss", ":Gitsigns stage_hunk<CR>")
-		map({ "n", "v" }, "<leader>sr", ":Gitsigns reset_hunk<CR>")
-		map("n", "<leader>sS", gs.stage_buffer)
-		map("n", "<leader>sR", gs.reset_buffer)
+		map("n", "<leader>gp", gs.preview_hunk)
+		map("n", "<leader>gu", gs.undo_stage_hunk)
+		map({ "n", "v" }, "<leader>gs", ":Gitsigns stage_hunk<CR>")
+		map({ "n", "v" }, "<leader>gr", ":Gitsigns reset_hunk<CR>")
+		map("n", "<leader>gS", gs.stage_buffer)
+		map("n", "<leader>gR", gs.reset_buffer)
+		map("n", "<leader>gd", gs.diffthis)
+		map("n", "<leader>gD", function()
+			gs.diffthis("~")
+		end)
 	end,
 })

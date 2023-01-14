@@ -1,28 +1,6 @@
--- -- Settings before init
-require("plugins.tokyonight")
+vim.cmd([[source ~/.config/nvim/lua/autocmds.vim]])
 
--- General
+require("performance")
 require("settings")
-require("highlight")
-
--- -- Mapping
-require("mappings.normal")
-require("mappings.command")
-
--- -- Plugins
+require("mappings")
 require("plugins")
-require("plugins.fzf")
-require("plugins.cmp")
-require("plugins.lsp")
-require("plugins.tree")
-require("plugins.indent")
-require("plugins.luasnip")
-require("plugins.comment")
-require("plugins.undotree")
-require("plugins.surround")
-require("plugins.gitsigns")
-require("plugins.fugitive")
-require("plugins.colorizer")
-require("plugins.autopairs")
-require("plugins.bufferline")
-require("plugins.treesitter")

@@ -1,19 +1,26 @@
 require("fzf-lua").setup({
 	winopts = {
 		preview = {
-			vertical = "down:45%",
+			default = "bat_native",
+			vertical = "down:40%",
 			horizontal = "right:60%",
 			layout = "horizontal",
 			scrollbar = false,
 		},
 	},
+	files = {
+		git_icons = false,
+	},
 })
 
--- FZF Mapping
-local map = require("utils/utils").map
-local grep_command = "<Cmd>lua require'fzf-lua'.grep_project({ fzf_cli_args = '--nth 2..' })<CR>"
+local keymap = vim.keymap
 
-map("n", "<Leader>ff", "<Cmd>FzfLua files<CR>", { silent = true })
-map("n", "<Leader>fg", grep_command, { silent = true })
-map("n", "<Leader>fs", "<Cmd>FzfLua git_status<CR>", { silent = true })
-map("n", "<Leader>fc", "<Cmd>FzfLua git_commits<CR>", { silent = true })
+keymap.set("n", "<leader>ff", "<cmd>FzfLua files<cr>", { silent = true })
+keymap.set("n", "<leader>fs", "<cmd>FzfLua git_status<cr>", { silent = true })
+keymap.set("n", "<leader>fc", "<cmd>FzfLua git_commits<cr>", { silent = true })
+keymap.set(
+	"n",
+	"<leader>fg",
+	"<Cmd>lua require'fzf-lua'.grep_project({ fzf_cli_args = '--nth 2..' })<CR>",
+	{ silent = true }
+)
