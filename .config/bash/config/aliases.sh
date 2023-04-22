@@ -9,10 +9,12 @@ alias notion="dae notion-snap"
 alias obsidian="dae obsidian"
 alias thunderbird="dae thunderbird"
 alias slack="dae slack"
+alias diagram="dae drawio"
 alias ytmusic="dae ~/Applications/ytmusic.AppImage"
 alias hollow-knight=". ~/Games/GOG\ Games/Hollow\ Knight/start.sh"
 
 # Shortcuts Aliases
+alias p="pnpm"
 alias cr="clear"
 alias ex="exit"
 alias nv="nvim"
@@ -37,7 +39,7 @@ alias bashrc="source ~/.bashrc"
 alias search="apt search"
 alias install="apt install"
 alias clean="apt autoremove && apt autopurge"
-alias update="apt update && apt upgrade -y && npm update -g && snap refresh && nvim --headless +PackerSync +qa"
+alias update="apt update && apt upgrade -y && npm update -g && pnpm update -g && snap refresh && nvim --headless +PackerUpdate +qa"
 
 # Usefule Aliases
 alias deact="deactivate"
@@ -103,8 +105,6 @@ else
   echo "batcat command does not exist :("
 fi
 
-alias firebase="echo 'Confirma este deploy y utiliza la ruta absoluta'"
-
 # Firebase aliases
-alias fdp="nb && /home/ricardo/.nvm/versions/node/v16.18.0/bin/firebase hosting:channel:deploy prueba"
-alias fl="/home/ricardo/.nvm/versions/node/v16.18.0/bin/firebase hosting:channel:list"
+alias fdp="nb && firebase hosting:channel:deploy prueba"
+alias fl="firebase hosting:channel:list"

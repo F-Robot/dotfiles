@@ -2,6 +2,7 @@
 
 # Vi Mode in Prompt Bash
 set -o vi
+set editing-mode vi
 
 # Don't put duplicate lines in history
 HISTCONTROL=ignoreboth
