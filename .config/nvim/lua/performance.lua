@@ -1,4 +1,5 @@
 local g = vim.g
+
 -- disable some builtin vim plugins
 local default_plugins = {
   '2html_plugin',

@@ -22,7 +22,7 @@ diagnostic.config({
 })
 
 local capabilities =
-  cmp_capabilities.default_capabilities(lsp.protocol.make_client_capabilities())
+    cmp_capabilities.default_capabilities(lsp.protocol.make_client_capabilities())
 
 local function handle_attach()
   local map_opts = {
@@ -144,6 +144,10 @@ lspconfig.marksman.setup({
   capabilities = capabilities,
   on_attach = handle_attach,
 })
+lspconfig.bashls.setup({
+  capabilities = capabilities,
+  on_attach = handle_attach,
+})
 lspconfig.tailwindcss.setup({
   capabilities = capabilities,
   on_attach = handle_attach,
@@ -163,19 +167,21 @@ lspconfig.lua_ls.setup({
   settings = {
     Lua = {
       runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
         version = 'LuaJIT',
-        path = split(package.path, ';'),
       },
       diagnostics = {
-        globals = { 'vim', 'require', 'package', 'pairs' },
+        -- Get the language server to recognize the `vim` global
+        globals = { 'vim' },
       },
       workspace = {
-        library = {
-          [fn.expand('$VIMRUNTIME/lua')] = true,
-          [fn.expand('$VIMRUNTIME/lua/lsp')] = true,
-        },
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
       },
-      telemetry = { enable = false },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
     },
   },
 })
