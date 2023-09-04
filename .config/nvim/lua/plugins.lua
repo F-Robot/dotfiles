@@ -2,6 +2,7 @@ require('packer').startup(function(use)
   -- Packer
   use('wbthomason/packer.nvim')
   -- Colorscheme
+  use('folke/tokyonight.nvim')
   use('NvChad/nvim-colorizer.lua')
   use('lukas-reineke/indent-blankline.nvim')
   use({ 'catppuccin/nvim', as = 'catppuccin' })
@@ -36,6 +37,7 @@ require('packer').startup(function(use)
   -- LSP
   use('neovim/nvim-lspconfig')
   use('jose-elias-alvarez/null-ls.nvim')
+  use('jose-elias-alvarez/typescript.nvim')
 end)
 
 require('plugins.colorscheme')
@@ -54,3 +56,4 @@ require('plugins.fzf')
 require('plugins.cmp')
 require('plugins.lsp')
 require('plugins.git')
+require('plugins.typescript')

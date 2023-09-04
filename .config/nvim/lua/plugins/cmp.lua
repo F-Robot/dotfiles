@@ -31,11 +31,11 @@ cmp.setup({
     format = lspkind.cmp_format({
       with_text = true,
       menu = {
-        buffer = '[BUF ]',
-        nvim_lsp = '[LSP ]',
-        path = '[PATH ]',
+        buffer = '[BUF ]',
+        nvim_lsp = '[LSP 󰊕]',
+        path = '[PATH ]',
         luasnip = '[SNIP ]',
-        nvim_lsp_signature_help = '[SIGN ]',
+        nvim_lsp_signature_help = '[SIGN 󰆧]',
       },
     }),
   },
