@@ -1,7 +1,7 @@
 #!/bin/bash
 
-. /home/ricardo/.config/bash/config/exports.sh
-. /home/ricardo/.config/bash/config/functions.sh
-. /home/ricardo/.config/bash/config/aliases.sh
-. /home/ricardo/.config/bash/config/settings.sh
-. /home/ricardo/.config/bash/config/init.sh
+. /home/f-robot/.config/bash/config/exports.sh
+. /home/f-robot/.config/bash/config/functions.sh
+. /home/f-robot/.config/bash/config/aliases.sh
+. /home/f-robot/.config/bash/config/settings.sh
+. /home/f-robot/.config/bash/config/init.sh

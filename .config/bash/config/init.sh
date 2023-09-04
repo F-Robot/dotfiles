@@ -4,7 +4,7 @@
 eval "$(starship init bash)"
 
 # Init Cargo
-. "/home/ricardo/.cargo/env"
+. "/home/f-robot/.cargo/env"
 
 # Init FZF
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
