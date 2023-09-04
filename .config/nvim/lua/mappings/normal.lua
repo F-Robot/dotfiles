@@ -24,6 +24,9 @@ keymap.set('n', '<c-k>', '<C-w>k')
 keymap.set('n', '<c-h>', '<C-w>h')
 keymap.set('n', '<c-l>', '<C-w>l')
 
+keymap.set('n', '<c-b>', '<c-v>')
+keymap.set('n', '<c-s-b>', '<c-s-v>')
+
 -- Resize current window sizes.
 keymap.set('n', '<s-Up>', '2<c-w>+')
 keymap.set('n', '<s-Down>', '2<c-w>-')

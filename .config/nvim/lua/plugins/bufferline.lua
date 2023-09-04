@@ -1,14 +1,14 @@
 local getSymbol = function(name)
   if name == 'error' then
-    return ' '
+    return '󰅙 '
   end
   if name == 'warning' then
     return ' '
   end
   if name == 'hint' then
-    return ' '
+    return '󱐋 '
   end
-  return ' '
+  return '󰋼 '
 end
 
 local diagnostics_indicator = function(count, level, diagnostics_dict, context)
