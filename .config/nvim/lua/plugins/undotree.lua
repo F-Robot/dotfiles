@@ -2,16 +2,16 @@ local cmd = vim.cmd
 local g = vim.g
 
 -- Add optional plugin to 'runtimepath' without sourcing anything.
-cmd('silent! packadd! undotree')
+cmd("silent! packadd! undotree")
 
 -- Open tree on the right side and open diff below that.
 g.undotree_WindowLayout = 3
 
 -- Set the tree node shape.
-g.undotree_TreeNodeShape = '*'
+g.undotree_TreeNodeShape = "*"
 
 -- Set the tree vertical shape.
-g.undotree_TreeVertShape = '|'
+g.undotree_TreeVertShape = "|"
 
 -- Use relative timestamps.
 g.undotree_RelativeTimestamp = 1
@@ -35,7 +35,7 @@ g.undotree_DiffAutoOpen = false
 g.undotree_DiffpanelHeight = 15
 
 -- Set the command used to get the diff output.
-g.undotree_DiffCommand = 'diff'
+g.undotree_DiffCommand = "diff"
 
 -- Highlight changed text.
 g.undotree_HighlightChangedText = true
@@ -44,14 +44,9 @@ g.undotree_HighlightChangedText = true
 g.undotree_CursorLine = true
 
 -- Default highlight groups for syntax items.
-g.undotree_HighlightSyntaxAdd = 'DiffAdd'
-g.undotree_HighlightSyntaxChange = 'DiffChange'
-g.undotree_HighlightSyntaxDel = 'DiffDelete'
+g.undotree_HighlightSyntaxAdd = "DiffAdd"
+g.undotree_HighlightSyntaxChange = "DiffChange"
+g.undotree_HighlightSyntaxDel = "DiffDelete"
 
 -- Define mapping.
-vim.keymap.set(
-  'n',
-  '<space>u',
-  '<Cmd>call undotree#UndotreeToggle()<CR>',
-  { silent = true }
-)
+vim.keymap.set("n", "<space>u", "<Cmd>call undotree#UndotreeToggle()<CR>", { silent = true })

@@ -15,7 +15,8 @@ require('packer').startup(function(use)
   use('numToStr/Comment.nvim')
   use('kylechui/nvim-surround')
   -- Git
-  use({ 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim' })
+  use('nvim-lua/plenary.nvim')
+  use('lewis6991/gitsigns.nvim')
   use('tpope/vim-fugitive')
   -- UI
   use('mbbill/undotree')
@@ -27,6 +28,7 @@ require('packer').startup(function(use)
   use('hrsh7th/cmp-buffer')
   use('hrsh7th/cmp-cmdline')
   use('onsails/lspkind-nvim')
+  use('jose-elias-alvarez/nvim-lsp-ts-utils')
   use('hrsh7th/cmp-nvim-lsp-signature-help')
   use({ 'hrsh7th/cmp-nvim-lsp', requires = 'onsails/lspkind-nvim' })
   -- Snippets

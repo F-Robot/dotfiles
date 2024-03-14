@@ -1,3 +1,3 @@
-require('mappings.normal')
-require('mappings.command')
-require('mappings.commands')
+require("mappings.normal")
+require("mappings.command")
+require("mappings.commands")

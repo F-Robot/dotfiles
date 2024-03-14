@@ -1,1 +1,1 @@
-vim.keymap.set('n', 'gl', '<Cmd>G<CR>')
+vim.keymap.set("n", "gl", "<Cmd>G<CR>")
