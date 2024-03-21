@@ -1,6 +1,7 @@
 require('packer').startup(function(use)
   -- Packer
   use('wbthomason/packer.nvim')
+  use('williamboman/mason.nvim')
   -- Colorscheme
   use('folke/tokyonight.nvim')
   use('NvChad/nvim-colorizer.lua')
@@ -40,6 +41,11 @@ require('packer').startup(function(use)
   use('neovim/nvim-lspconfig')
   use('jose-elias-alvarez/null-ls.nvim')
   use('jose-elias-alvarez/typescript.nvim')
+
+  use('williamboman/mason.nvim')
+  use('nvimtools/none-ls.nvim')
+  use('jay-babu/mason-null-ls.nvim')
+  
 end)
 
 require('plugins.colorscheme')
@@ -59,3 +65,8 @@ require('plugins.cmp')
 require('plugins.lsp')
 require('plugins.git')
 require('plugins.typescript')
+
+require("mason").setup()
+require("mason-null-ls").setup({
+    handlers = {},
+})

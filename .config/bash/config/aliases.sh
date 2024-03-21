@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # system
 alias ex="exit"
 alias cl="clear"
@@ -8,9 +6,6 @@ alias du="du --max-depth=1 --si"
 alias mv="mv --interactive --verbose"
 alias cp="cp --interactive --verbose"
 alias ln="ln --interactive --verbose"
-alias activate="source venv/bin/activate"
-alias update="apt update && apt upgrade -y && npm update -g && snap refresh"
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # git
 alias ga="git add"
@@ -41,10 +36,6 @@ if command -v lsd &>/dev/null; then
   alias ls="lsd"
 fi
 
-# firebase
-alias fp="firebase hosting:channel:deploy prueba"
-alias fl="firebase hosting:channel:list"
-
 # lsd
 alias ll='ls -l'
 alias la='ls -a'
@@ -52,14 +43,11 @@ alias lla='ls -la'
 alias lt='ls --tree'
 
 # pm2
-alias pl="pm2 log"
-alias pi="pm2 list"
+alias pg="pm2 log"
+alias pl="pm2 list"
 alias ps="pm2 stop"
 alias pd="pm2 delete" 
 alias pr="pm2 restart"
-alias pss="pm2 start npm -- start"
-alias psd="pm2 start npm -- run dev"
-alias psc="pm2 start --name docker-compose docker -- compose up --build"
 
 # pnpm for npm (if pnpm exists)
 if command -v pnpm &>/dev/null; then
@@ -71,7 +59,6 @@ alias ns="npm start"
 alias ni="npm install"
 alias nd="npm run dev"
 alias nt="npm run test"
-alias ns="npm run serve"
 alias nb="npm run build"
 alias ne="npm run deploy"
 
