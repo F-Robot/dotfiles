@@ -104,6 +104,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end,
 })
 
+-- Auto save file
 vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
   group = augroup("savebuffer"),
   callback = function()
@@ -114,9 +115,7 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
           ["']"] = vim.fn.getpos("']")
         }
       }
-
       vim.cmd('silent! update')
-
       for key, value in pairs(save.marks) do
         vim.fn.setpos(key, value)
       end

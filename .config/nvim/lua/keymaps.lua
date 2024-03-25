@@ -1,13 +1,6 @@
 local map = vim.keymap.set
 
--- Command Mode Move
-map("c", "<C-j>", "<Down>")
-map("c", "<C-k>", "<Up>")
-map("c", "<C-h>", "<Left>")
-map("c", "<C-l>", "<Right>")
-
 -- close buffer
-map("n", "<leader>c", "<cmd>bd<cr>", { desc = "Delete window", remap = true })
 map("n", "<leader>cw", "<C-W>c", { desc = "Delete window", remap = true })
 
 -- Write buffer
@@ -32,11 +25,11 @@ map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", remap = true })
 map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window", remap = true })
 map("n", "<C-l>", "<C-w>l", { desc = "Go to right window", remap = true })
 
--- Resize window using <ctrl> arrow keys
-map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
-map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
-map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
-map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+-- -- Resize window using <ctrl> arrow keys
+map("n", "<A-S-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
+map("n", "<A-S-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
+map("n", "<A-S-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+map("n", "<A-S-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
 -- Move Lines
 map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
@@ -126,26 +119,26 @@ local api = vim.api
 local lsp = vim.lsp.buf
 
 api.nvim_create_autocmd('LspAttach', {
-  group = api.nvim_create_augroup('UserLspConfig', {}),
-  callback = function(ev)
-    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+	group = api.nvim_create_augroup('UserLspConfig', {}),
+	callback = function(ev)
+		vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-    local opts = { buffer = ev.buf }
+		local opts = { buffer = ev.buf }
 
-    map('n', 'gd', lsp.definition, opts)
-    map('n', 'gr', lsp.rename, opts)
-    map('n', 'K', lsp.hover, opts)
-    map('n', 'ge', lsp.references, opts)
-    map('n', 'gt', lsp.type_definition, opts)
-    map('n', 'gf', function() lsp.format({ async = true }) end, opts)
-    map({ 'n', 'v' }, 'ga', lsp.code_action, opts)
+		map('n', 'gd', lsp.definition, opts)
+		map('n', 'gr', lsp.rename, opts)
+		map('n', 'K', lsp.hover, opts)
+		map('n', 'ge', lsp.references, opts)
+		map('n', 'gt', lsp.type_definition, opts)
+		map('n', 'gf', function() lsp.format({ async = true }) end, opts)
+		map({ 'n', 'v' }, 'ga', lsp.code_action, opts)
 
-    map('n', 'gc', lsp.declaration, opts)
-    map('n', 'gi', lsp.implementation, opts)
-    map('n', 'gs', lsp.signature_help, opts)
+		map('n', 'gc', lsp.declaration, opts)
+		map('n', 'gi', lsp.implementation, opts)
+		map('n', 'gs', lsp.signature_help, opts)
 
-    map('n', 'gwa', lsp.add_workspace_folder, opts)
-    map('n', 'gwr', lsp.remove_workspace_folder, opts)
-    map('n', 'gwl', function() print(vim.inspect(lsp.list_workspace_folders())) end, opts)
-  end,
+		map('n', 'gwa', lsp.add_workspace_folder, opts)
+		map('n', 'gwr', lsp.remove_workspace_folder, opts)
+		map('n', 'gwl', function() print(vim.inspect(lsp.list_workspace_folders())) end, opts)
+	end,
 })
