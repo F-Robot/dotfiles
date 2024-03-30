@@ -4,6 +4,7 @@ require('mini.surround').setup()
 require('mini.bufremove').setup()
 
 local ai = require('mini.ai')
+
 require('mini.ai').setup({
   n_lines = 500,
   custom_textobjects = {

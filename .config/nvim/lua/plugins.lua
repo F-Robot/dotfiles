@@ -8,9 +8,6 @@ require('lazy').setup({
     lazy = false,
     priority = 1000,
     name = 'kanagawa',
-    config = function()
-      utils.set_schema('kanagawa')
-    end,
   },
   {
     'neovim/nvim-lspconfig',
@@ -100,9 +97,23 @@ require('lazy').setup({
     'rafamadriz/friendly-snippets',
     'lewis6991/gitsigns.nvim',
     'RRethy/vim-illuminate',
-    'mbbill/undotree'
+    'mbbill/undotree',
   },
 })
+
+require('kanagawa').setup({
+  transparent = true,
+  colors = {
+    theme = {
+      all = {
+        ui = {
+          bg_gutter = 'none',
+        },
+      },
+    },
+  },
+})
+utils.set_schema('kanagawa')
 
 require('plugins.lsp')
 require('plugins.tree')
