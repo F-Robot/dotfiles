@@ -16,11 +16,11 @@ require('lazy').setup({
     'onsails/lspkind.nvim',
   },
   {
-    'jay-babu/mason-null-ls.nvim',
+    'nvimtools/none-ls.nvim',
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'nvimtools/none-ls.nvim',
+      'jay-babu/mason-null-ls.nvim',
     },
   },
   { 'echasnovski/mini.nvim', version = false },
@@ -55,6 +55,9 @@ require('lazy').setup({
     main = 'ibl',
   },
   {
+    'b0o/schemastore.nvim',
+  },
+  {
     'akinsho/bufferline.nvim',
     version = '*',
     dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
@@ -75,6 +78,7 @@ require('lazy').setup({
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-nvim-lsp-document-symbol',
+      'saadparwaiz1/cmp_luasnip',
     },
   },
   {
@@ -94,6 +98,10 @@ require('lazy').setup({
   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   {
     'L3MON4D3/LuaSnip',
+    version = 'v2.*',
+    build = 'make install_jsregexp',
+  },
+  {
     'rafamadriz/friendly-snippets',
     'lewis6991/gitsigns.nvim',
     'RRethy/vim-illuminate',

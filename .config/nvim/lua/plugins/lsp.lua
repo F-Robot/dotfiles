@@ -24,10 +24,14 @@ setDiagnosticSymbol('Info', ' ')
 setDiagnosticSymbol('Hint', ' ')
 setDiagnosticSymbol('Warn', ' ')
 
-map('n', '[d', vim.diagnostic.goto_prev)
-map('n', ']d', vim.diagnostic.goto_next)
-map('n', 'J', vim.diagnostic.open_float)
-map('n', 'gq', vim.diagnostic.setloclist)
+map('n', '[d', diagnostic.goto_prev)
+map('n', ']d', diagnostic.goto_next)
+map('n', 'J', function()
+  diagnostic.open_float({
+    source = 'always',
+  })
+end)
+map('n', 'gq', diagnostic.setloclist)
 
 api.nvim_create_autocmd('LspAttach', {
   group = api.nvim_create_augroup('UserLspConfig', {}),
@@ -64,6 +68,29 @@ require('mason-lspconfig').setup({
     function(server_name)
       require('lspconfig')[server_name].setup({
         capabilities = capabilities,
+      })
+    end,
+    ['yamlls'] = function()
+      require('lspconfig').yamlls.setup({
+        capabilities = capabilities,
+        yaml = {
+          schemaStore = {
+            enable = false,
+            url = '',
+          },
+          schemas = require('schemastore').yaml.schemas(),
+        },
+      })
+    end,
+    ['jsonls'] = function()
+      require('lspconfig').jsonls.setup({
+        capabilities = capabilities,
+        settings = {
+          json = {
+            schemas = require('schemastore').json.schemas(),
+            validate = { enable = false },
+          },
+        },
       })
     end,
     ['lua_ls'] = function()
