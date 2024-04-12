@@ -2,7 +2,6 @@ require('nvim-treesitter.configs').setup({
   indent = { enable = true },
   highlight = {
     enable = true,
-    additional_vim_regex_highlighting = false,
   },
   autotag = {
     enable = true,
@@ -71,12 +70,9 @@ require('nvim-treesitter.configs').setup({
     'python',
     'query',
     'regex',
-    'toml',
     'tsx',
     'typescript',
     'vim',
     'vimdoc',
-    'xml',
-    'yaml',
   },
 })
