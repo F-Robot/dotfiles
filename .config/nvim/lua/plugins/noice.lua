@@ -25,7 +25,7 @@ vim.api.nvim_set_hl(0, 'NoiceConfirmBorder', { link = cmdGroup })
 
 require('noice').setup({
   presets = {
-    bottom_search = true,
+    bottom_search = false,
     lsp_doc_border = true,
     command_palette = true,
     long_message_to_split = true,

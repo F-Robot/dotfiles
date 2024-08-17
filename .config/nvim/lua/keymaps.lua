@@ -8,7 +8,7 @@ map('n', '<leader>cw', '<C-W>c', { desc = 'Delete window', remap = true })
 map('n', '<leader>w', '<cmd>w<cr>', { silent = true })
 
 -- search and replace under cursor word
-map('n', '<leader>ur', 'yiw:%s/<c-R>"/<C-R>"/<left>')
+map('n', '<leader>sr', 'yiw:%s/<c-R>"/<C-R>"/<left>')
 
 -- Add [count] blank lines above or below the cursor.
 map(
@@ -103,8 +103,8 @@ map('n', '<leader>xq', '<cmd>copen<cr>', { desc = 'Quickfix List' })
 
 map('n', '[q', vim.cmd.cprev, { desc = 'Previous quickfix' })
 map('n', ']q', vim.cmd.cnext, { desc = 'Next quickfix' })
-
 -- quit
+
 map('n', '<leader>q', '<cmd>qa<cr>', { desc = 'Quit all' })
 map('n', '<leader>k', '<cmd>terminal<cr>', { desc = 'Terminal (root dir)' })
 

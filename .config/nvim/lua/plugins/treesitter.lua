@@ -1,4 +1,4 @@
-require('nvim-treesitter.configs').setup({
+require('nvim-treesitter').setup({
   indent = { enable = true },
   highlight = {
     enable = true,
@@ -74,5 +74,7 @@ require('nvim-treesitter.configs').setup({
     'typescript',
     'vim',
     'vimdoc',
+    'http',
   },
 })
+require('nvim-ts-autotag').setup({})

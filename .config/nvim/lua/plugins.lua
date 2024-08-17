@@ -9,6 +9,7 @@ require('lazy').setup({
     priority = 1000,
     name = 'kanagawa',
   },
+  'norcalli/nvim-colorizer.lua',
   {
     'neovim/nvim-lspconfig',
     'williamboman/mason.nvim',
@@ -28,7 +29,6 @@ require('lazy').setup({
     'folke/noice.nvim',
     event = 'VeryLazy',
     dependencies = {
-      'rcarriga/nvim-notify',
       'MunifTanjim/nui.nvim',
     },
   },
@@ -121,8 +121,20 @@ require('kanagawa').setup({
     },
   },
 })
+
 utils.set_schema('kanagawa')
 
+require('nvim-web-devicons').setup({
+  override = {
+    http = {
+      icon = '',
+      color = '#E10098',
+      name = 'HTTP',
+    },
+  },
+})
+
+require('colorizer').setup()
 require('plugins.lsp')
 require('plugins.tree')
 require('plugins.cmp')
@@ -134,3 +146,6 @@ require('plugins.noice')
 require('plugins.indent')
 require('plugins.gitsigns')
 require('plugins.bufferline')
+require('ts_context_commentstring').setup({
+  enable_autocmd = false,
+})
