@@ -31,6 +31,7 @@ require('lazy').setup({
     event = 'InsertEnter',
     dependencies = {
       'hrsh7th/cmp-calc',
+      'dmitmel/cmp-cmdline-history',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-nvim-lsp',

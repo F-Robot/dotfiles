@@ -3,23 +3,26 @@ local api = vim.api
 local lsp = vim.lsp.buf
 local map = vim.keymap.set
 local diagnostic = vim.diagnostic
-local function patch(result)
-  if not vim.tbl_islist(result) or type(result) ~= "table" then
-    return result
-  end
-
-  return { result[1] }
-end
-local function handle_gtd(err, result, ctx, ...)
-  vim.lsp.handlers['textDocument/definition'](err, patch(result), ctx, ...)
-end
-
-
 
 local function setDiagnosticSymbol(name, icon)
   local hl = 'DiagnosticSign' .. name
   fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl })
 end
+
+local border = {
+  { '┌', 'FloatBorder' },
+  { '─', 'FloatBorder' },
+  { '┐', 'FloatBorder' },
+  { '│', 'FloatBorder' },
+  { '┘', 'FloatBorder' },
+  { '─', 'FloatBorder' },
+  { '└', 'FloatBorder' },
+  { '│', 'FloatBorder' },
+}
+local handlers = {
+  ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+  ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+}
 
 diagnostic.config({
   virtual_text = {
@@ -28,6 +31,7 @@ diagnostic.config({
     source = 'if_many',
   },
   severity_sort = true,
+  float = { border = border },
 })
 
 setDiagnosticSymbol('Error', ' ')
@@ -81,6 +85,7 @@ require('mason-lspconfig').setup({
     function(server_name)
       require('lspconfig')[server_name].setup({
         capabilities = capabilities,
+        handlers = handlers
       })
     end,
   },

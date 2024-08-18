@@ -19,6 +19,7 @@ cmp.setup({
       menu = {
         buffer = '[BUF  ]',
         path = '[PATH  ]',
+        cmdline_history = '[HIST  ]',
         calc = '[CALC 󰃬]',
         nvim_lsp = '[LSP  ]',
         nvim_lua = '[LUA  ]',
@@ -55,12 +56,6 @@ cmp.setup({
   },
 })
 
-cmp.setup.cmdline({ '/', '?' }, {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = 'buffer' }
-  }
-})
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
@@ -69,4 +64,11 @@ cmp.setup.cmdline(':', {
     { name = 'cmdline' }
   }),
   matching = { disallow_symbol_nonprefix_matching = false }
+})
+
+cmp.setup.cmdline({ '/', '?' }, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
 })
