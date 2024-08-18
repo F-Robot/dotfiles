@@ -9,7 +9,17 @@ require('lazy').setup({
     priority = 1000,
     name = 'kanagawa',
   },
-  'norcalli/nvim-colorizer.lua',
+  {
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
+    lazy = false,
+    priority = 999,
+    cmd = { 'TSUpdateSync', 'TSUpdate', 'TSInstall' },
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      'nvim-treesitter/nvim-treesitter-context',
+    },
+  },
   {
     'neovim/nvim-lspconfig',
     'williamboman/mason.nvim',
@@ -17,59 +27,7 @@ require('lazy').setup({
     'onsails/lspkind.nvim',
   },
   {
-    'nvimtools/none-ls.nvim',
-    event = { 'BufReadPre', 'BufNewFile' },
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'jay-babu/mason-null-ls.nvim',
-    },
-  },
-  { 'echasnovski/mini.nvim', version = false },
-  {
-    'folke/noice.nvim',
-    event = 'VeryLazy',
-    dependencies = {
-      'MunifTanjim/nui.nvim',
-    },
-  },
-  {
-    'nvim-treesitter/nvim-treesitter',
-    version = false,
-    build = ':TSUpdate',
-    event = { 'VeryLazy' },
-    init = utils.init_treesitter,
-    cmd = { 'TSUpdateSync', 'TSUpdate', 'TSInstall' },
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-      'nvim-treesitter/nvim-treesitter-context',
-      'windwp/nvim-ts-autotag',
-    },
-  },
-  {
-    'dstein64/vim-startuptime',
-    cmd = 'StartupTime',
-    config = utils.init_startuptime,
-  },
-  {
-    'lukas-reineke/indent-blankline.nvim',
-    main = 'ibl',
-  },
-  {
-    'b0o/schemastore.nvim',
-  },
-  {
-    'akinsho/bufferline.nvim',
-    version = '*',
-    dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true },
-  },
-  {
-    'JoosepAlviste/nvim-ts-context-commentstring',
-    lazy = true,
-    opts = { enable_autocmd = false },
-  },
-  {
     'hrsh7th/nvim-cmp',
-    version = false,
     event = 'InsertEnter',
     dependencies = {
       'hrsh7th/cmp-calc',
@@ -82,70 +40,62 @@ require('lazy').setup({
     },
   },
   {
-    'nvim-tree/nvim-tree.lua',
-    version = '*',
-    lazy = false,
+    'L3MON4D3/LuaSnip',
+    version = 'v2.*',
+    build = 'make install_jsregexp',
     dependencies = {
+      'rafamadriz/friendly-snippets',
+    },
+  },
+  {
+    'nvim-tree/nvim-tree.lua',
+    dependencies = {
+      'mbbill/undotree',
+      'akinsho/bufferline.nvim',
       'nvim-tree/nvim-web-devicons',
     },
   },
   {
+    'norcalli/nvim-colorizer.lua',
+    'lewis6991/gitsigns.nvim',
+    'echasnovski/mini.nvim',
+    'windwp/nvim-ts-autotag',
+  },
+  {
     'nvim-telescope/telescope.nvim',
     cmd = 'Telescope',
-    version = false,
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    dependencies = {
+      'nvim-lua/plenary.nvim'
+    },
+  },
+  {
+    'b0o/schemastore.nvim',
   },
   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   {
-    'L3MON4D3/LuaSnip',
-    version = 'v2.*',
-    build = 'make install_jsregexp',
+    'dstein64/vim-startuptime',
+    cmd = 'StartupTime',
   },
   {
-    'rafamadriz/friendly-snippets',
-    'lewis6991/gitsigns.nvim',
-    'RRethy/vim-illuminate',
-    'mbbill/undotree',
-  },
-})
-
-require('kanagawa').setup({
-  transparent = true,
-  colors = {
-    theme = {
-      all = {
-        ui = {
-          bg_gutter = 'none',
-        },
-      },
+    'nvimtools/none-ls.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'jay-babu/mason-null-ls.nvim',
     },
   },
 })
 
 utils.set_schema('kanagawa')
 
-require('nvim-web-devicons').setup({
-  override = {
-    http = {
-      icon = '',
-      color = '#E10098',
-      name = 'HTTP',
-    },
-  },
-})
-
-require('colorizer').setup()
+require('plugins.treesitter')
 require('plugins.lsp')
-require('plugins.tree')
 require('plugins.cmp')
 require('plugins.snippets')
-require('plugins.treesitter')
-require('plugins.telescope')
+require('plugins.tree')
+require('colorizer').setup()
 require('plugins.mini')
-require('plugins.noice')
-require('plugins.indent')
 require('plugins.gitsigns')
 require('plugins.bufferline')
-require('ts_context_commentstring').setup({
-  enable_autocmd = false,
-})
+require('plugins.telescope')
+require('nvim-ts-autotag').setup()

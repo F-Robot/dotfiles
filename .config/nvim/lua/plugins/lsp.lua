@@ -3,7 +3,18 @@ local api = vim.api
 local lsp = vim.lsp.buf
 local map = vim.keymap.set
 local diagnostic = vim.diagnostic
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local function patch(result)
+  if not vim.tbl_islist(result) or type(result) ~= "table" then
+    return result
+  end
+
+  return { result[1] }
+end
+local function handle_gtd(err, result, ctx, ...)
+  vim.lsp.handlers['textDocument/definition'](err, patch(result), ctx, ...)
+end
+
+
 
 local function setDiagnosticSymbol(name, icon)
   local hl = 'DiagnosticSign' .. name
@@ -38,7 +49,7 @@ api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-    local opts = { buffer = ev.buf }
+    local opts = { buffer = ev.buf, silent = true }
 
     map('n', 'gd', lsp.definition, opts)
     map('n', 'gr', lsp.rename, opts)
@@ -62,6 +73,8 @@ api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 require('mason').setup()
 require('mason-lspconfig').setup({
   handlers = {
@@ -70,42 +83,29 @@ require('mason-lspconfig').setup({
         capabilities = capabilities,
       })
     end,
-    ['yamlls'] = function()
-      require('lspconfig').yamlls.setup({
-        capabilities = capabilities,
-        yaml = {
-          schemaStore = {
-            enable = false,
-            url = '',
-          },
-          schemas = require('schemastore').yaml.schemas(),
-        },
-      })
-    end,
-    ['jsonls'] = function()
-      require('lspconfig').jsonls.setup({
-        capabilities = capabilities,
-        settings = {
-          json = {
-            schemas = require('schemastore').json.schemas(),
-            validate = { enable = false },
-          },
-        },
-      })
-    end,
-    ['lua_ls'] = function()
-      require('lspconfig').lua_ls.setup({
-        capabilities = capabilities,
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { 'jit', 'vim', 'nvim_bufferline' },
-            },
-          },
-        },
-      })
-    end,
   },
+  ['jsonls'] = function()
+    require('lspconfig').jsonls.setup({
+      capabilities = capabilities,
+      settings = {
+        json = {
+          schemas = require('schemastore').json.schemas(),
+        },
+      },
+    })
+  end,
+  ['lua_ls'] = function()
+    require('lspconfig').lua_ls.setup({
+      capabilities = capabilities,
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = { 'jit', 'vim', 'nvim_bufferline' },
+          },
+        },
+      },
+    })
+  end,
 })
 
 require('mason-null-ls').setup({ handlers = {} })
