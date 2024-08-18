@@ -3,6 +3,17 @@ local luasnip = require('luasnip')
 
 local disable_in_comments = function()
   local context = require('cmp.config.context')
+  local buftype = vim.api.nvim_buf_get_option(0, 'buftype')
+  local is_floating = vim.api.nvim_win_get_config(0).relative ~= ''
+
+  if is_floating then
+    return false
+  end
+
+  if buftype == 'prompt' then
+    return false
+  end
+
   if vim.api.nvim_get_mode().mode == 'c' then
     return true
   else
