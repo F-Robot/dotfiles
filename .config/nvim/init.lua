@@ -1,6 +1,2 @@
-vim.cmd([[source ~/.config/nvim/lua/autocmds.vim]])
-
-require('performance')
-require('settings')
-require('mappings')
-require('plugins')
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")

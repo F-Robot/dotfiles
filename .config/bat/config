@@ -1,5 +1,5 @@
 # theme
---theme="OneHalfDark"
+--theme="kanagawa"
 
 # output style
---style="numbers"
+--style="plain"
