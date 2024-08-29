@@ -1,74 +1,43 @@
-local cmp = require('cmp')
-local lspkind = require('lspkind')
-local utils = require('plugins.utils')
+return {
+  "hrsh7th/nvim-cmp",
+  ---@param opts cmp.ConfigSchema
+  opts = function(_, opts)
+    table.insert(opts.sources, { name = "emoji" })
 
-cmp.setup({
-  enabled = utils.disable_in_comments,
-  snippet = {
-    expand = utils.expand_function,
-  },
-  completion = {
-    completeopt = 'menu,menuone,noinsert',
-  },
-  formatting = {
-    format = lspkind.cmp_format({
-      mode = 'symbol_text',
-      maxwidth = 50,
-      ellipsis_char = '...',
-      show_labelDetails = true,
-      menu = {
-        buffer = '[BUF  ]',
-        path = '[PATH  ]',
-        cmdline_history = '[HIST  ]',
-        calc = '[CALC 󰃬]',
-        nvim_lsp = '[LSP  ]',
-        nvim_lua = '[LUA  ]',
-        luasnip = '[SNIP  ]',
-        nvim_lsp_signature_help = '[SIGN 󰆧 ]',
-      },
-    }),
-  },
-  mapping = {
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<Tab>'] = cmp.mapping(utils.tab_function, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(utils.tab_shift_function, { 'i', 's' }),
-    ['<CR>'] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = false,
-    }),
-  },
-  sources = cmp.config.sources({
-    { name = 'nvim_lua' },
-    { name = 'nvim_lsp' },
-    { name = 'nvim_lsp_signature_help' },
-    { name = 'luasnip' },
-    { name = 'buffer' },
-    { name = 'path' },
-    { name = 'calc' },
-  }),
-  window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
-  },
-})
+    local has_words_before = function()
+      unpack = unpack or table.unpack
+      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    end
 
-cmp.setup.cmdline(':', {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
-    { name = 'cmdline' }
-  }),
-  matching = { disallow_symbol_nonprefix_matching = false }
-})
+    local cmp = require("cmp")
 
-cmp.setup.cmdline({ '/', '?' }, {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = 'buffer' }
-  }
-})
+    opts.mapping = vim.tbl_extend("force", opts.mapping, {
+      ["<Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
+          cmp.select_next_item()
+        elseif vim.snippet.active({ direction = 1 }) then
+          vim.schedule(function()
+            vim.snippet.jump(1)
+          end)
+        elseif has_words_before() then
+          cmp.complete()
+        else
+          fallback()
+        end
+      end, { "i", "s" }),
+      ["<S-Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        elseif vim.snippet.active({ direction = -1 }) then
+          vim.schedule(function()
+            vim.snippet.jump(-1)
+          end)
+        else
+          fallback()
+        end
+      end, { "i", "s" }),
+    })
+  end,
+}
