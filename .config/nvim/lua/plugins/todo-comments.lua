@@ -1,4 +1,4 @@
 return {
-  "folke/flash.nvim",
+  "folke/todo-comments.nvim",
   enabled = false,
 }
