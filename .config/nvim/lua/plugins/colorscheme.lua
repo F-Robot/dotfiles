@@ -1,23 +1,12 @@
 return {
-  -- "folke/tokyonight.nvim",
-  {
-    "rebelot/kanagawa.nvim",
-    opts = {
-      transparent = true,
+  "folke/tokyonight.nvim",
+  opts = {
+    style = "storm",
+    transparent = true,
+    styles = {
+      sidebars = "transparent",
+      floats = "transparent",
     },
+    dim_inactive = true,
   },
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "kanagawa",
-    },
-  },
-  -- opts = {
-  --   style = "night",
-  --   transparent = true,
-  --   styles = {
-  --     sidebars = "transparent",
-  --     floats = "transparent",
-  --   },
-  -- },
 }
