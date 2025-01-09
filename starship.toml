@@ -4,3 +4,10 @@ add_newline = false
 [character]
 success_symbol = "[Ψ]($style)"
 error_symbol = "[Ω]($style)"
+
+[time]
+disabled = false
+use_12hr = true
+format = '[\[$time\]]($style) '
+time_format = '%I:%M'
+utc_time_offset = 'local'
