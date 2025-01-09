@@ -1,10 +1,11 @@
 return {
   "hrsh7th/nvim-cmp",
+  dependencies = { "hrsh7th/cmp-emoji", "hrsh7th/cmp-calc" },
   ---@param opts cmp.ConfigSchema
-  sources = {
-    { name = "nvim_lsp" },
-  },
   opts = function(_, opts)
+    table.insert(opts.sources, { name = "emoji" })
+    table.insert(opts.sources, { name = "calc" })
+
     local has_words_before = function()
       unpack = unpack or table.unpack
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -13,15 +14,9 @@ return {
 
     local cmp = require("cmp")
 
-    opts.window = {
-      completion = cmp.config.window.bordered(),
-      documentation = cmp.config.window.bordered(),
-    }
-
     opts.mapping = vim.tbl_extend("force", opts.mapping, {
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
-          -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
           cmp.select_next_item()
         elseif vim.snippet.active({ direction = 1 }) then
           vim.schedule(function()
