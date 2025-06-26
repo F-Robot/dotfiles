@@ -1,11 +1,11 @@
 # system
-alias ex="exit"
-alias cl="clear"
-alias mk="mkdir -p"
-alias du="du --max-depth=1 --si"
-alias mv="mv --interactive --verbose"
-alias cp="cp --interactive --verbose"
-alias ln="ln --interactive --verbose"
+# alias ex="exit"
+# alias cl="clear"
+# alias mk="mkdir -p"
+# alias du="du --max-depth=1 --si"
+# alias mv="mv --interactive --verbose"
+# alias cp="cp --interactive --verbose"
+# alias ln="ln --interactive --verbose"
 
 # git
 alias ga="git add"

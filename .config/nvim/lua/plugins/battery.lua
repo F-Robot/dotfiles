@@ -1,0 +1,4 @@
+return {
+  "justinhj/battery.nvim",
+}
+
